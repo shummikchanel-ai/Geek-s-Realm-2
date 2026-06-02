@@ -1,0 +1,960 @@
+/* ---------- RESET & GLOBAL ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;   /* общий фон страницы */
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', 'Malgun Gothic', sans-serif;
+    line-height: 1.4;
+}
+
+/* контейнер шириной 1440px, центрирование */
+.site-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: #000000;
+}
+
+/* ---------- ШАПКА ---------- */
+.header {
+    background-color: #201E1E;
+    /* inner shadow: x=11, y=9, blur=33.3, spread=-12, цвет DFC4C4 */
+    box-shadow: inset 11px 9px 33.3px -12px #DFC4C4;
+    /* внутренние отступы: сверху/снизу 56px, слева/справа 149px */
+    padding: 56px 149px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ЛОГОТИП */
+.logo {
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #A1A2BF;          /* цвет текста логотипа */
+    white-space: nowrap;
+}
+
+/* НАВИГАЦИЯ: 5 пунктов */
+.nav {
+    margin-left: 69px;        /* отступ слева от пяти пунктов */
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 42px;               /* расстояние между пунктами (можно регулировать) */
+    margin: 0;
+    padding: 0;
+}
+
+.nav a {
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+    font-size: 18px;
+    color: #AABDD7;          /* цвет текста пунктов меню */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav a:hover {
+    color: #d0e2ff;
+}
+
+/* БЛОК КНОПОК СПРАВА */
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 18px;               /* расстояние между кнопками 18px */
+    margin-left: auto;       /* прижимаем к правому краю */
+    margin-right: 16px;      /* чтобы в сумме с padding-right 149px дало 165px от правого края шапки */
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #A1A2BF;          /* цвет кнопок */
+    font-size: 24px;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.25s ease;
+    background-color: rgba(161, 162, 191, 0.05);
+}
+
+.icon-btn i {
+    font-size: 22px;
+    pointer-events: none;
+}
+
+.icon-btn:hover {
+    color: #ffffff;
+    background-color: rgba(161, 162, 191, 0.2);
+}
+
+/* ---------- ОСНОВНОЙ КОНТЕНТ (демо) ---------- */
+.main-content {
+    padding: 60px 149px 100px;
+    color: #e0e0e0;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    background: linear-gradient(135deg, #AABDD7, #C0D4F0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #A1A2BF;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cards {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #1C1A1A;
+    border-radius: 24px;
+    padding: 28px 24px;
+    width: 280px;
+    text-align: center;
+    border: 1px solid #2E2B2B;
+}
+
+.card i {
+    font-size: 40px;
+    color: #AABDD7;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    font-size: 22px;
+    color: #E0E0E0;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #A1A2BF;
+}
+
+/* ---------- АДАПТИВНОСТЬ (сохраняем отступы) ---------- */
+@media (max-width: 1280px) {
+    .header {
+        padding: 40px 80px;
+    }
+    .main-content {
+        padding: 40px 80px 80px;
+    }
+    .nav ul {
+        gap: 28px;
+    }
+    .nav {
+        margin-left: 45px;
+    }
+}
+
+@media (max-width: 980px) {
+    .header {
+        padding: 28px 40px;
+        flex-wrap: wrap;
+        row-gap: 24px;
+    }
+    .nav {
+        margin-left: 0;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+    .nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+    .buttons {
+        margin-right: 0;
+    }
+    .logo {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 680px) {
+    .header {
+        padding: 20px 24px;
+    }
+    .buttons {
+        gap: 12px;
+    }
+    .icon-btn {
+        width: 38px;
+        height: 38px;
+    }
+    .nav a {
+        font-size: 16px;
+    }
+    .main-content {
+        padding: 32px 24px 60px;
+    }
+    .hero h1 {
+        font-size: 28px;
+    }
+}
+/* ---------- СЕКЦИЯ С КАРТИНКОЙ (позиционирование) ---------- */
+.hero-block {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    /* Высота блока определяется абсолютно позиционированной картинкой */
+    min-height: 327px;
+    overflow: visible; /* чтобы картинка могла выходить за пределы */
+}
+
+/* Контейнер для картинки, позволяющий позиционировать её абсолютно */
+.hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Картинка: 1440x327, сдвиг x=138, y=164 */
+.hero-image {
+    position: absolute;
+    left: -149px;
+    top: -392px;
+    width: 1440px;
+    height: 327px;
+    background-image: url('https://picsum.photos/id/104/1440/327'); /* замените на свой URL */
+    background-size: cover;
+    background-position: center;
+    /* Два inner shadow */
+    box-shadow: 
+        inset -52px 14px 20px 0 rgba(0, 0, 0, 0.25),
+        inset 9px 10px 43.5px 0 rgba(253, 242, 255, 0.25);
+    z-index: 1;
+}
+
+/* Прямоугольник с текстом (лежит поверх картинки) */
+.hero-text {
+    position: absolute;
+    left: calc(-75px + 0px);   /* 138px (сдвиг картинки) + 90px = 228px */
+    bottom: 140px;                /* относительно родителя .hero-image-wrapper */
+    width: 461px;
+    height: 56px;                /* увеличенная высота для текста 24px */
+    
+    border-radius: 28px;
+    /* Градиент: прозрачный → rgba(51,43,43,0.45) → прозрачный */
+    background: linear-gradient(90deg, 
+        rgba(51, 43, 43, 0) 0%, 
+        rgba(51, 43, 43, 0.45) 50%, 
+        rgba(51, 43, 43, 0) 100%);
+    /* Внутренняя тень прямоугольника */
+    box-shadow: inset -22px -10px 11.1px -6px rgba(0, 0, 0, 0.25);
+    
+    /* Стили текста */
+    font-family: 'Jersey 25', 'Courier New', monospace;
+    font-size: 20px;
+    line-height: 56px;   /* центрирование по вертикали */
+    color: #C3D0DA;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.5px;
+    z-index: 2;
+}
+
+/* Контейнер для абсолютного позиционирования */
+.buttons-container {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: 800px; /* чтобы кнопки не обрезались */
+}
+
+/* Кнопка */
+.square-button {
+    position: absolute;
+    width: 275px;
+    height: 275px;
+    border-radius: 30px;
+    background-color: #1D1B1D;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Место для картинки */
+.button-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-color: #2a2a2a; /* временный фон */
+    /* Пример: background-image: url('ваша_картинка.jpg'); */
+}
+
+/* Эффект при наведении */
+.square-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Адаптивность: на узких экранах кнопки выстраиваются вертикально */
+@media (max-width: 1200px) {
+    .buttons-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        margin-top: 520px;
+        min-height: auto;
+    }
+    .square-button {
+        position: static;
+        margin: 0 auto;
+    }
+}/* Родительский контейнер для абсолютного позиционирования */
+.absolute-texts {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: 200px; /* чтобы текст не обрезался, если вылезает за пределы */
+}
+
+/* Стиль каждого текста */
+.text-abs {
+    position: absolute;
+    font-family: 'Jersey 25', 'Courier New', monospace;
+    font-size: 17px;
+    line-height: 0.5;
+    color: #D7D7D7;
+    text-align: center;
+    width: auto;
+    white-space: nowrap; /* чтобы текст не переносился, если не нужно */
+    /* при необходимости можно задать max-width и white-space: normal */
+}
+
+/* Адаптивность: на мобильных экранах тексты могут наезжать, поэтому лучше переопределить */
+@media (max-width: 1200px) {
+    .absolute-texts {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-top: 100px;
+    }
+    .text-abs {
+        position: static;
+        white-space: normal;
+        text-align: center;
+        max-width: 90%;
+    }
+}/* Контейнер страницы (если ещё нет position: relative, добавьте) */
+.site-container {
+    position: relative;  /* чтобы абсолютное позиционирование работало относительно него */
+    /* остальные стили (max-width:1440px, margin:0 auto и т.д.) уже есть */
+}
+
+/* Прямоугольник с координатами x=122, y=829 */
+.positioned-rectangle {
+    position: absolute;
+    left: 0%;
+    top: 829px;
+    width: 1440px;
+    height: 701px;
+    background-color: #121111;
+    border-radius: 61px;
+    box-shadow: 
+        20px 33px 77.9px -48px rgba(0, 0, 0, 0.5),
+        inset 3px 12px 123.3px -54px rgba(0, 0, 0, 0.8);
+}.news-badge {
+    position: absolute;
+    width: 496px;
+    height: 104px;
+    background-color: #1D1B1D;
+    border-radius: 40px;
+    box-shadow: 
+        inset -12px -11px 57.6px 0 rgba(0, 0, 0, 0.5),
+        inset 8px 9px 22.3px -16px #847CF4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-title {
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 40px;
+    color: #AAB6C8;
+    letter-spacing: 0.1em;
+}
+/* Контейнер для новых кнопок — не трогает .buttons-container */
+.custom-buttons-container {
+    position: relative;
+    width: 100%;
+    min-height: 1500px; /* чтобы кнопки не обрезались */
+}
+
+/* Новая кнопка — уникальный класс, не конфликтует с .square-button */
+.custom-button {
+    position: absolute;
+    width: 195px;
+    height: 367px;
+    border-radius: 49px;
+    background-color: #d3d3d3;
+    box-shadow: 11px 14px 20.6px 0 rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Место для картинки */
+.custom-button-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Эффекты только для новых кнопок */
+.custom-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 11px 17px 22px 0 rgba(0, 0, 0, 0.85);
+}
+
+.custom-button:active {
+    transform: translateY(1px);
+    box-shadow: 11px 12px 18px 0 rgba(0, 0, 0, 0.9);
+}
+
+/* Адаптивность для новых кнопок (на узких экранах вертикальный ряд) */
+@media (max-width: 1350px) {
+    .custom-buttons-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 37px;
+        margin-top: 1055px;
+        min-height: auto;
+    }
+    .custom-button {
+        position: static;
+        margin: 0 auto;
+    }
+}
+.rounded-box {
+    position: absolute;
+    left: 196px;
+    top: 1687px;
+    width: 461px;
+    height: 105px;
+    background-color: rgba(55, 66, 80, 0.49); /* #374250 с прозрачностью 49% */
+    border-radius: 28px;
+    box-shadow: 
+        inset 10px 10px 19.8px -11px #5D5889,      /* inner shadow */
+        20px 16px 46.6px -3px rgba(134, 97, 135, 0.25); /* drop shadow */
+}
+.main-content-label {
+    position: absolute;
+    left: 255px;
+    top: 1715px;
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 40px;
+    color: #C1D3EE;
+    z-index: 21; /* чтобы быть выше прямоугольника */
+    white-space: nowrap; /* текст в одну строку */
+}
+/* Контейнер для позиционирования */
+.gradient-rectangles {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Прямоугольник с градиентом */
+.gradient-rect {
+    position: absolute;
+    top: -1410px;
+    width: 380px;
+    height: 1082px;
+    border-radius: 70px;
+    background: linear-gradient(to top right, #1B2046, #7D3B5A);
+    /* Вариант "из левого нижнего в правый верхний" = to top right */
+    z-index: 1;
+}
+/* Контейнер для внутренних прямоугольников (если нужен отдельный) */
+.inner-rectangles {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Внутренний прямоугольник */
+.inner-rect {
+    position: absolute;
+    width: 323px;
+    height: 1035px;
+    border-radius: 70px;
+    background-color: rgba(116, 116, 116, 0.55); /* 55% прозрачности */
+    box-shadow: inset 5px 7px 27.6px -6px rgba(233, 221, 238, 0.25);
+    z-index: 2; /* выше больших прямоугольников (у них z-index:1) */
+}
+.small-rect {
+    position: absolute;
+    width: 209px;
+    height: 49px;
+    border-radius: 49px;
+    background-color: rgba(147, 179, 228, 0.22); /* 22% прозрачности */
+    z-index: 3;
+}
+.heading-overlay {
+    position: absolute;
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 18px;
+    color: #FFFFFF;
+    white-space: nowrap;
+    z-index: 30; /* выше прямоугольников и внутренних слоёв */
+}
+
+.heading-1 {
+    left: 120px;
+    top: 2025px;
+}
+
+.heading-2 {
+    left: 655px;
+    top: 2025px;
+}
+
+.heading-3 {
+    left: 1225px;
+    top: 2025px;
+}
+.photo-rectangles {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.photo-rect {
+    position: absolute;
+    width: 281px;
+    height: 157px;
+    background-color: #04010D;
+    border-radius: 20px;
+    overflow: hidden;
+    z-index: 25; /* выше предыдущих слоёв */
+    cursor: pointer;
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-color: #2a2a2a; /* временный фон */
+}
+
+/* При вставке фото добавить: background-image: url('фото.jpg'); */
+.review-text-block {
+    position: absolute;
+    left: 52px;
+    top: 2290px;
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 23px;
+    line-height: 50px;
+    color: #A6B0B4;
+    text-align: left;      /* выравнивание по левому краю */
+    white-space: normal;
+    z-index: 25;
+}
+.topics-list {
+    position: absolute;
+    left: 635px;
+    top: 2290px;
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 23px;
+    line-height: 50px;
+    color: #A6B0B4;
+    text-align: left;
+    white-space: normal;
+    z-index: 25;
+}
+.top-games-list {
+    position: absolute;
+    left: 1162px;
+    top: 2290px;
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 23px;
+    line-height: 50px;
+    color: #A6B0B4;
+    text-align: left;
+    white-space: normal;
+    z-index: 25;
+}
+.photo-rect {
+    position: absolute;
+    width: 281px;
+    height: 157px;
+    border-radius: 20px;
+    background-color: #04010D;
+    overflow: hidden;
+    z-index: 26;
+    /* В будущем сюда добавится фото */
+}
+
+.photo-rect img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.xcom-review {
+    position: absolute;
+    left: 57px;
+    top: 2670px;
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 23px;
+    line-height: 50px;
+    color: #A6B0B4;
+    text-align: left;
+    white-space: normal;
+    z-index: 25;
+}
+.button-rect {
+    position: absolute;
+    width: 163px;
+    height: 69px;
+    border-radius: 17.5px;
+    background-color: rgba(147, 179, 228, 0.22); /* 22% прозрачности */
+    display: flex;
+    align-items: center;      /* вертикальное выравнивание */
+    justify-content: flex-start; /* горизонтальное выравнивание по левому краю */
+    padding-left: 20px;       /* отступ слева для текста */
+    box-sizing: border-box;
+    z-index: 30;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.button-rect:hover {
+    background-color: rgba(147, 179, 228, 0.4);
+    transform: translateY(-2px);
+}
+
+.button-text {
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 50px;         /* как задано */
+    color: #000000;
+    text-align: left;
+}
+.background-rectangle {
+    position: flex;
+    left: 2px;
+    top: 3221px;
+    width: 1440px;
+    height: 718px;
+    background-color: #1E1E20;
+    box-shadow: inset 15px 16px 28.2px -19px rgba(245, 222, 255, 0.25);
+    z-index: 0; /* или ниже, чем у контента, если нужно */
+}
+/* Контейнер для позиционирования элементов поверх фона */
+.overlay-form {
+    position: flex;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+@font-face {
+    font-family: 'JejuGothic';
+    src: local('JejuGothic');
+}
+
+/* Ограничиваем влияние стилей только этим контейнером */
+.geeks-realm-layout {
+    width: 1440px;
+    height: 718px;
+    margin: 0 auto; /* Центрирует макет на странице, не ломая остальное */
+    background-color: #1a1a1a;
+    font-family: 'JejuGothic', sans-serif;
+    color: #ffffff;
+    box-sizing: border-box;
+    display: block; /* Убираем flex с родителя, чтобы не двигать другие элементы */
+    
+}
+
+.geeks-footer-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 80px;
+    box-sizing: border-box;
+}
+
+.footer-line {
+    width: 100%;
+    height: 2px;
+    background-color: #3d3d3d;
+    margin: 10px 0;
+}
+
+/* Верхняя часть */
+.footer-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-name {
+    font-size: 32px;
+    color: #a4a4b2;
+    font-weight: bold;
+    margin-left: 0px;
+}
+
+.brand-logo { height: 50px; vertical-align: middle; }
+
+.footer-sub-form {
+    display: flex;
+    background-color: #212635;
+    border-radius: 4px;
+    width: 650px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    flex-grow: 1;
+}
+
+.icon-mail { height: 20px; }
+
+.input-group input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 18px;
+    width: 100%;
+    outline: none;
+}
+
+.footer-sub-form button {
+    background-color: #5578ab;
+    color: white;
+    border: none;
+    padding: 0 40px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Центр */
+.footer-main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.links-wrapper { display: flex; gap: 80px; }
+
+.links-block {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 25px 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.links-block a {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.footer-apps-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+.store-links img { height: 55px; margin-left: 15px; }
+
+.join-label {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 35px;
+    border-radius: 40px;
+    letter-spacing: 2px;
+}
+
+/* Низ */
+.footer-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copy-pill {
+    background-color: #2a2a2a;
+    padding: 10px 35px;
+    border-radius: 30px;
+    font-size: 14px;
+    color: #888;
+}
+
+.social-group a { margin-left: 25px; }
+.social-group img { height: 50px; }
+/* ---------- Хлебные крошки ---------- */
+.breadcrumbs {
+    margin-bottom: 30px;
+    font-size: 16px;
+    color: #A6B0B4;
+}
+.breadcrumbs a {
+    color: #AABDD7;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.breadcrumbs a:hover {
+    color: #d0e2ff;
+    text-decoration: underline;
+}
+body.light-theme .breadcrumbs {
+    color: #5a5a6e;
+}
+body.light-theme .breadcrumbs a {
+    color: #2c3e66;
+}
+.game-card-link {
+    text-decoration: none;
+    display: block;
+}
+/* Контейнер для изображения и кнопок поверх него */
+.game-cover-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.game-cover {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Блок с кнопками поверх фото */
+.cover-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    z-index: 10;
+}
+
+/* Каждая кнопка */
+.cover-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* ← центрирование текста */
+    position: relative;
+    overflow: hidden;
+    background: transparent;   /* убираем лишний фон */
+    z-index: 1;
+}
+
+/* Псевдоэлемент для фонового изображения с прозрачностью 0.5 */
+.cover-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/vkladki.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    z-index: -1;
+    border-radius: 40px;
+}
+
+/* Эффект при наведении */
+.cover-btn:hover {
+    transform: translateY(-2px);
+}
+.cover-btn:hover::before {
+    opacity: 0.8;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 768px) {
+    .cover-buttons {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        gap: 8px;
+    }
+    .cover-btn {
+        padding: 8px 0;
+        font-size: 12px;
+    }
+}

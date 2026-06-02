@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek's Realm — Гайды по играм</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #000000;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', 'Malgun Gothic', sans-serif;
+            line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+        .site-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background-color: #000000;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+        .header {
+            background-color: #201E1E;
+            box-shadow: inset 11px 9px 33.3px -12px #DFC4C4;
+            padding: 56px 149px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+        .logo {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: #A1A2BF;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+        .nav {
+            margin-left: 69px;
+        }
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 42px;
+            margin: 0;
+            padding: 0;
+        }
+        .nav a {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 18px;
+            color: #AABDD7;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .nav a:hover { color: #d0e2ff; }
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+        .icon-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #A1A2BF;
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.25s ease;
+            background-color: rgba(161, 162, 191, 0.05);
+            text-decoration: none;
+        }
+        .icon-btn i { font-size: 22px; pointer-events: none; }
+        .icon-btn:hover { color: #ffffff; background-color: rgba(161, 162, 191, 0.2); }
+        .breadcrumbs {
+            margin-bottom: 30px;
+            font-size: 16px;
+            color: #A6B0B4;
+        }
+        .breadcrumbs a {
+            color: #AABDD7;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumbs a:hover {
+            color: #d0e2ff;
+            text-decoration: underline;
+        }
+        body.light-theme .breadcrumbs { color: #5a5a6e; }
+        body.light-theme .breadcrumbs a { color: #2c3e66; }
+        .guides-container {
+            padding: 80px 149px 120px;
+            color: #e0e0e0;
+            position: relative;
+        }
+        .guides-container h1 {
+            font-size: 40px;
+            text-align: center;
+            color: #C1D3EE;
+            margin-bottom: 40px;
+        }
+        .carousel-3d-wrapper {
+            perspective: 1200px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+            position: relative;
+            cursor: grab;
+        }
+        .carousel-3d-wrapper:active { cursor: grabbing; }
+        .carousel-3d {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            transform-style: preserve-3d;
+        }
+        .carousel-item-3d {
+            position: absolute;
+            width: 280px;
+            height: 360px;
+            left: 10px;
+            top: 20px;
+            backface-visibility: visible;
+            transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border-radius: 30px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+        .carousel-item-3d.active {
+            cursor: pointer;
+            filter: brightness(1);
+            background: rgba(255,255,255,0.12);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .carousel-item-3d:not(.active) {
+            filter: brightness(0.5) blur(1px);
+            pointer-events: none;
+            cursor: default;
+        }
+        .game-guide-card {
+            text-align: center;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .game-guide-card img {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+        .game-guide-card h3 {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .active .game-guide-card h3 { color: #C1D3EE; }
+        .game-guide-card p { font-size: 14px; color: #A6B0B4; }
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .carousel-arrow {
+            pointer-events: auto;
+            background: rgba(170, 189, 215, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: #AABDD7;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 20px;
+        }
+        .carousel-arrow:hover {
+            background: rgba(170, 189, 215, 0.5);
+            transform: scale(1.05);
+            color: white;
+        }
+        .geeks-realm-layout {
+            width: 1440px;
+            height: 718px;
+            margin: 0 auto;
+            margin-top: 100px;
+            background-color: #1a1a1a;
+            font-family: 'JejuGothic', sans-serif;
+            color: #ffffff;
+            box-sizing: border-box;
+            display: block;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+        .geeks-footer-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 80px;
+            box-sizing: border-box;
+        }
+        .footer-line {
+            width: 100%;
+            height: 2px;
+            background-color: #3d3d3d;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+        .footer-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-name {
+            font-size: 32px;
+            color: #a4a4b2;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+        .brand-logo { height: 50px; vertical-align: middle; }
+        .footer-sub-form {
+            display: flex;
+            background-color: #212635;
+            border-radius: 4px;
+            width: 650px;
+            transition: background-color 0.3s ease;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            flex-grow: 1;
+        }
+        .icon-mail { height: 20px; }
+        .input-group input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 18px;
+            width: 100%;
+            outline: none;
+            transition: color 0.2s ease;
+        }
+        .footer-sub-form button {
+            background-color: #5578ab;
+            color: white;
+            border: none;
+            padding: 0 40px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        .footer-main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .links-wrapper { display: flex; gap: 80px; }
+        .links-block {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 25px 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .links-block a {
+            display: flex;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+            transition: color 0.2s ease;
+        }
+        .footer-apps-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 30px;
+        }
+        .store-links img { height: 55px; margin-left: 15px; }
+        .join-label {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 35px;
+            border-radius: 40px;
+            letter-spacing: 2px;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .copy-pill {
+            background-color: #2a2a2a;
+            padding: 10px 35px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #888;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+        .social-group a { margin-left: 25px; }
+        .social-group img { height: 50px; }
+        .notification-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        .notification-modal-content {
+            background-color: #1a1a1a;
+            padding: 30px 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .notification-modal-text {
+            font-size: 20px;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+        .notification-modal-close {
+            background-color: #5578ab;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .notification-modal-close:hover { background-color: #3a5a8a; }
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+        }
+        .video-modal-content iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: none;
+        }
+        .video-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.5);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .video-modal-close:hover {
+            background: rgba(0,0,0,0.9);
+            color: #AABDD7;
+        }
+
+        /* Модальное окно для картинки (Telegram) */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .image-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+        }
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.5);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .image-modal-close:hover {
+            background: rgba(0,0,0,0.9);
+            color: #AABDD7;
+        }
+
+        body.light-theme {
+            background-color: #f5f5f7;
+        }
+        body.light-theme .site-container { background-color: #ffffff; }
+        body.light-theme .header {
+            background-color: #e9e9ef;
+            box-shadow: inset 11px 9px 33.3px -12px rgba(0,0,0,0.15);
+        }
+        body.light-theme .logo, body.light-theme .nav a { color: #1e1e2a; }
+        body.light-theme .icon-btn {
+            color: #2c2c38;
+            background-color: rgba(0,0,0,0.05);
+        }
+        body.light-theme .icon-btn:hover { color: #000; background-color: rgba(0,0,0,0.15); }
+        body.light-theme .guides-container h1 { color: #2c3e66; }
+        body.light-theme .carousel-item-3d { background: rgba(0,0,0,0.05); }
+        body.light-theme .carousel-item-3d.active { background: rgba(0,0,0,0.1); }
+        body.light-theme .game-guide-card h3 { color: #1a1a2a; }
+        body.light-theme .active .game-guide-card h3 { color: #2c3e66; }
+        body.light-theme .carousel-arrow {
+            background: rgba(0,0,0,0.1);
+            color: #2c2c38;
+        }
+        body.light-theme .carousel-arrow:hover { background: rgba(0,0,0,0.2); }
+        body.light-theme .geeks-realm-layout {
+            background-color: #eaeef5;
+            color: #111;
+        }
+        body.light-theme .footer-line { background-color: #b0b0b8; }
+        body.light-theme .brand-name { color: #2c2c3a; }
+        body.light-theme .footer-sub-form { background-color: #d0d4e0; }
+        body.light-theme .input-group input { color: #111; }
+        body.light-theme .footer-sub-form button { background-color: #3a6a9a; }
+        body.light-theme .links-block { background-color: rgba(0, 0, 0, 0.05); }
+        body.light-theme .links-block a { color: #1a1a2a; }
+        body.light-theme .join-label { background: rgba(0, 0, 0, 0.05); color: #222; }
+        body.light-theme .copy-pill { background-color: #d0d0d8; color: #333; }
+        body.light-theme .notification-modal-content {
+            background-color: #f0f0f5;
+            border-color: rgba(0,0,0,0.1);
+        }
+        body.light-theme .notification-modal-text { color: #1a1a2a; }
+        body.light-theme .video-modal-content { background: #f0f0f5; }
+        body.light-theme .video-modal-close {
+            color: #1a1a2a;
+            background: rgba(255,255,255,0.5);
+        }
+        body.light-theme .video-modal-close:hover { background: rgba(255,255,255,0.9); }
+        body.light-theme .image-modal-content {
+            background: #f0f0f5;
+        }
+        body.light-theme .image-modal-close {
+            color: #1a1a2a;
+            background: rgba(255,255,255,0.5);
+        }
+        body.light-theme .image-modal-close:hover {
+            background: rgba(255,255,255,0.9);
+        }
+    </style>
+</head>
+<body>
+<div class="site-container">
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" alt="logo" style="height:50px;">
+            <div class="logo">Geek's Realm</div>
+        </a>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="games.html">Обзоры</a></li>
+                <li><a href="guides.html">Гайды</a></li>
+                <li><a href="forum.html">Форум</a></li>
+            </ul>
+        </nav>
+        <div class="buttons">
+            <a href="profile.html" class="icon-btn" aria-label="Профиль"><i class="fas fa-user"></i></a>
+            <button class="icon-btn" aria-label="Уведомления"><i class="fas fa-bell"></i></button>
+            <button class="icon-btn theme-toggle" aria-label="Настройки"><i class="fas fa-cog"></i></button>
+        </div>
+    </header>
+
+    <main class="guides-container">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> → Гайды
+        </div>
+        <h1><i class="fas fa-video"></i> Гайды по играм</h1>
+        <div class="carousel-3d-wrapper" id="carouselWrapper">
+            <div class="carousel-3d" id="carousel3d"></div>
+            <div class="carousel-nav">
+                <button class="carousel-arrow" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-arrow" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <div class="geeks-realm-layout">
+        <footer class="geeks-footer-container">
+            <div class="footer-header-row">
+                <div class="footer-brand">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <img src="images/logo.png" alt="" class="brand-logo">
+                        <span class="brand-name">Geek's Realm</span>
+                    </a>
+                </div>
+                <div class="footer-sub-form">
+                    <div class="input-group">
+                        <img src="images/Vector.png" alt="" class="icon-mail">
+                        <input type="text" placeholder="Введите свою почту, чтобы получать последние новости">
+                    </div>
+                    <button type="button">Отправить</button>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-main-content">
+                <div class="links-wrapper">
+                    <div class="links-block">
+                        <a href="news.html">Новости</a>
+                        <a href="news.html">Статьи</a>
+                        <a href="guides.html">Видео</a>
+                    </div>
+                    <div class="links-block">
+                        <a href="https://www.twitch.tv/directory" target="_blank" rel="noopener noreferrer">Стримы</a>
+                        <a href="#" id="contactsLink">Контакты</a>
+                        <a href="rules.html">Правила сооб-ва</a>
+                    </div>
+                    <div class="links-block">
+                        <a href="cheats.html">Читы</a>
+                        <a href="games.html">Игры</a>
+                        <a href="news.html">Блоги</a>
+                    </div>
+                </div>
+                <div class="footer-apps-section">
+                    <div class="store-links">
+                        <img src="images/Group.png" alt="App Store">
+                        <img src="images/Vector1.png" alt="Google Play">
+                    </div>
+                    <p class="join-label">Присоединяйтесь к нам</p>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-bottom-row">
+                <div class="copy-pill">CompanyName @ 202X. All rights reserved.</div>
+                <div class="social-group">
+                    <a href="#" id="telegramIcon"><img src="images/image 23.png" alt="TG"></a>
+                    <a href="#" id="instagramIcon"><img src="images/image 24.png" alt="INST"></a>
+                    <a href="#" id="youtubeIcon"><img src="images/image 25.png" alt="YT"></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<div id="notificationModal" class="notification-modal">
+    <div class="notification-modal-content">
+        <i class="fas fa-bell" style="font-size: 40px; margin-bottom: 15px; color: #AABDD7;"></i>
+        <p class="notification-modal-text">У вас пока нет новых сообщений.</p>
+        <button class="notification-modal-close">Закрыть</button>
+    </div>
+</div>
+<div id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+        <span class="video-modal-close">&times;</span>
+        <iframe id="guideVideo" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+</div>
+
+<!-- Модальное окно для картинки (Telegram) -->
+<div id="imageModal" class="image-modal">
+    <div class="image-modal-content">
+        <span class="image-modal-close">&times;</span>
+        <img id="modalImage" src="" alt="Telegram">
+    </div>
+</div>
+
+<script>
+(function() {
+    // Тема
+    const themeToggleBtn = document.querySelector('.theme-toggle');
+    if (themeToggleBtn) {
+        function setTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.add('light-theme');
+                localStorage.setItem('geeks-theme', 'light');
+            } else {
+                document.body.classList.remove('light-theme');
+                localStorage.setItem('geeks-theme', 'dark');
+            }
+        }
+        const savedTheme = localStorage.getItem('geeks-theme');
+        if (savedTheme === 'light') setTheme('light');
+        else if (savedTheme === 'dark') setTheme('dark');
+        else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+        themeToggleBtn.addEventListener('click', () => {
+            const isLight = document.body.classList.contains('light-theme');
+            setTheme(isLight ? 'dark' : 'light');
+        });
+    }
+
+    // Уведомления
+    const bellBtn = document.querySelector('.icon-btn[aria-label="Уведомления"]');
+    const modal = document.getElementById('notificationModal');
+    const closeModal = document.querySelector('.notification-modal-close');
+    if (bellBtn && modal) bellBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
+    if (closeModal) closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+    // Данные игр
+    const games = [
+        { name: 'Cyberpunk 2077', img: 'images/image 26.png', desc: 'Гайд по прохождению', guide: 'https://www.youtube.com/embed/ha4Lo77Bb74' },
+        { name: 'Kingdom Come: Deliverance II', img: 'images/kin.jpg', desc: 'Средневековые секреты', guide: 'https://www.youtube.com/embed/7jW8clhFkyY' },
+        { name: 'Monster Hunter Wilds', img: 'images/monster.jpg', desc: 'Охота на монстров', guide: 'https://www.youtube.com/embed/_ZGO_toFjGg' },
+        { name: 'Borderlands 4', img: 'images/border.jpg', desc: 'Лут и безумие', guide: 'https://www.youtube.com/embed/71cGPmN0944' },
+        { name: 'DOOM: The Dark Ages', img: 'images/doom.jpg', desc: 'Тактика уничтожения', guide: 'https://www.youtube.com/embed/bwNMLe9W1qk' },
+        { name: 'Pathologic 3', img: 'images/path.jpg', desc: 'Выживание в эпидемии', guide: 'https://www.youtube.com/embed/IM0p_Uf_8WA' }
+    ];
+    const count = games.length;
+    const angleStep = 360 / count; // 60°
+    const radius = 380;
+
+    const container = document.getElementById('carousel3d');
+    let currentAngle = 0; // угол поворота всей карусели (в градусах)
+    let animating = false;
+
+    // Создаём элементы
+    games.forEach((game, idx) => {
+        const item = document.createElement('div');
+        item.className = 'carousel-item-3d';
+        item.setAttribute('data-guide', game.guide);
+        item.innerHTML = `
+            <div class="game-guide-card">
+                <img src="${game.img}" alt="${game.name}">
+                <h3>${game.name}</h3>
+                <p>${game.desc}</p>
+            </div>
+        `;
+        container.appendChild(item);
+    });
+
+    const items = document.querySelectorAll('.carousel-item-3d');
+
+    // Обновление позиций всех карточек в зависимости от currentAngle
+    function updatePositions() {
+        const angleRad = currentAngle * Math.PI / 180;
+        items.forEach((item, idx) => {
+            const itemAngleBase = idx * angleStep;
+            const relativeAngle = itemAngleBase - currentAngle;
+            const rad = relativeAngle * Math.PI / 180;
+            const x = Math.sin(rad) * radius;
+            const z = Math.cos(rad) * radius;
+            const yaw = relativeAngle;
+            item.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${yaw}deg)`;
+        });
+        let norm = currentAngle % 360;
+        if (norm < 0) norm += 360;
+        let activeIndex = Math.round(norm / angleStep) % count;
+        items.forEach((item, idx) => {
+            if (idx === activeIndex) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    // Плавное изменение угла
+    function setAngle(newAngle, smooth = true) {
+        if (smooth) {
+            items.forEach(item => {
+                item.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+            });
+        } else {
+            items.forEach(item => {
+                item.style.transition = 'none';
+            });
+        }
+        currentAngle = newAngle;
+        updatePositions();
+        if (smooth) {
+            setTimeout(() => {
+                items.forEach(item => {
+                    item.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+                });
+            }, 600);
+        }
+    }
+
+    function rotateStep(delta) {
+        if (animating) return;
+        animating = true;
+        let newAngle = currentAngle + delta;
+        setAngle(newAngle, true);
+        setTimeout(() => { animating = false; }, 650);
+    }
+
+    // Кнопки
+    document.getElementById('prevBtn').addEventListener('click', () => rotateStep(-angleStep));
+    document.getElementById('nextBtn').addEventListener('click', () => rotateStep(angleStep));
+
+    // Перетаскивание
+    const wrapper = document.querySelector('.carousel-3d-wrapper');
+    let isDragging = false;
+    let startX, startAngleDrag;
+
+    function snapToNearest() {
+        let norm = currentAngle % 360;
+        if (norm < 0) norm += 360;
+        let nearest = Math.round(norm / angleStep) * angleStep;
+        let diff = nearest - currentAngle;
+        if (Math.abs(diff) > 180) {
+            if (diff > 0) nearest -= 360;
+            else nearest += 360;
+        }
+        if (Math.abs(nearest - currentAngle) > 5) {
+            setAngle(nearest, true);
+        } else {
+            setAngle(nearest, true);
+        }
+    }
+
+    wrapper.addEventListener('mousedown', (e) => {
+        if (animating) return;
+        isDragging = true;
+        startX = e.clientX;
+        startAngleDrag = currentAngle;
+        wrapper.style.cursor = 'grabbing';
+        items.forEach(item => item.style.transition = 'none');
+        e.preventDefault();
+    });
+    window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        wrapper.style.cursor = 'grab';
+        snapToNearest();
+    });
+    wrapper.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startX;
+        let newAngle = startAngleDrag + deltaX * 0.8;
+        currentAngle = newAngle;
+        updatePositions();
+    });
+    wrapper.addEventListener('touchstart', (e) => {
+        if (animating) return;
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startAngleDrag = currentAngle;
+        items.forEach(item => item.style.transition = 'none');
+        e.preventDefault();
+    });
+    wrapper.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        snapToNearest();
+    });
+    wrapper.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.touches[0].clientX - startX;
+        let newAngle = startAngleDrag + deltaX * 0.8;
+        currentAngle = newAngle;
+        updatePositions();
+    });
+
+    // Видео
+    const videoModal = document.getElementById('videoModal');
+    const videoIframe = document.getElementById('guideVideo');
+    const closeVideoBtn = document.querySelector('.video-modal-close');
+
+    function openGuideVideo(src) {
+        videoIframe.src = src + '?autoplay=1&rel=0';
+        videoModal.style.display = 'flex';
+    }
+    function closeVideoModal() {
+        videoModal.style.display = 'none';
+        videoIframe.src = '';
+    }
+    if (closeVideoBtn) closeVideoBtn.addEventListener('click', closeVideoModal);
+    window.addEventListener('click', (e) => { if (e.target === videoModal) closeVideoModal(); });
+
+    container.addEventListener('click', (e) => {
+        const activeItem = document.querySelector('.carousel-item-3d.active');
+        if (activeItem && (activeItem.contains(e.target) || activeItem === e.target)) {
+            const guideUrl = activeItem.getAttribute('data-guide');
+            if (guideUrl) openGuideVideo(guideUrl);
+        }
+    });
+
+    // --- Социальные иконки в подвале ---
+    const tgIcon = document.getElementById('telegramIcon');
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeImageBtn = document.querySelector('.image-modal-close');
+
+    if (tgIcon) {
+        tgIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalImage.src = 'images/image228.jpg';
+            imageModal.style.display = 'flex';
+        });
+    }
+    if (closeImageBtn) {
+        closeImageBtn.addEventListener('click', () => {
+            imageModal.style.display = 'none';
+            modalImage.src = '';
+        });
+    }
+    window.addEventListener('click', (e) => {
+        if (e.target === imageModal) {
+            imageModal.style.display = 'none';
+            modalImage.src = '';
+        }
+    });
+
+    const instIcon = document.getElementById('instagramIcon');
+    if (instIcon) {
+        instIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'https://www.instagram.com/go.lub97/';
+        });
+    }
+
+    const ytIcon = document.getElementById('youtubeIcon');
+    if (ytIcon) {
+        ytIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'https://youtube.com/';
+        });
+    }
+
+    // Кнопка отправки
+    const submitBtn = document.querySelector('.footer-sub-form button');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Спасибо, что поддерживаете нас! Теперь мы будем присылать вам самые свежие новости из мира игр!');
+        });
+    }
+    // Кнопка "Контакты" в футере
+        const contactsLink = document.getElementById('contactsLink');
+        if (contactsLink) {
+            contactsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Наша почта- okva5@bk.ru');
+            });
+        }
+    // Инициализация
+    setAngle(0, false);
+    
+})();
+</script>
+</body>
+</html>

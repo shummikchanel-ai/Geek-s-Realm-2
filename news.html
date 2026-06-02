@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek's Realm — Новости игр</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', 'Malgun Gothic', sans-serif;
+            line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .site-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background-color: #000000;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: #201E1E;
+            box-shadow: inset 11px 9px 33.3px -12px #DFC4C4;
+            padding: 56px 149px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .logo {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: #A1A2BF;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .nav {
+            margin-left: 69px;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 42px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav a {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 18px;
+            color: #AABDD7;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: #d0e2ff;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #A1A2BF;
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.25s ease;
+            background-color: rgba(161, 162, 191, 0.05);
+            text-decoration: none;
+        }
+
+        .icon-btn i {
+            font-size: 22px;
+            pointer-events: none;
+        }
+
+        .icon-btn:hover {
+            color: #ffffff;
+            background-color: rgba(161, 162, 191, 0.2);
+        }
+
+        /* ---------- ОСНОВНАЯ ОБЛАСТЬ (новости) ---------- */
+        .main-content {
+            padding: 80px 149px 120px;
+            color: #e0e0e0;
+            min-height: 60vh;
+        }
+
+        /* ---------- Хлебные крошки ---------- */
+        .breadcrumbs {
+            margin-bottom: 30px;
+            font-size: 16px;
+            color: #A6B0B4;
+        }
+        .breadcrumbs a {
+            color: #AABDD7;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumbs a:hover {
+            color: #d0e2ff;
+            text-decoration: underline;
+        }
+        body.light-theme .breadcrumbs {
+            color: #5a5a6e;
+        }
+        body.light-theme .breadcrumbs a {
+            color: #2c3e66;
+        }
+
+        /* ---------- КАРТОЧКА НОВОСТИ (сворачиваемая) ---------- */
+        .news-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 30px;
+            padding: 30px 40px;
+            margin-bottom: 30px;
+            border-left: 4px solid #C1D3EE;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .news-card:hover {
+            background: rgba(255,255,255,0.06);
+        }
+        body.light-theme .news-card {
+            background: rgba(0,0,0,0.03);
+            border-left-color: #2c3e66;
+        }
+        body.light-theme .news-card:hover {
+            background: rgba(0,0,0,0.06);
+        }
+
+        .news-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .news-title-section {
+            flex: 1;
+        }
+        .news-card h2 {
+            font-size: 28px;
+            color: #C1D3EE;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+        .news-date {
+            font-size: 14px;
+            color: #A6B0B4;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .expand-icon {
+            font-size: 24px;
+            color: #AABDD7;
+            transition: transform 0.3s ease;
+        }
+        .news-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+        .news-tags {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            background: rgba(170, 189, 215, 0.15);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #AABDD7;
+        }
+        body.light-theme .tag {
+            background: rgba(0,0,0,0.08);
+            color: #2c3e66;
+        }
+        /* Сворачиваемый контент */
+        .news-expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            margin-top: 0;
+        }
+        .news-card.expanded .news-expandable-content {
+            max-height: 2000px; /* достаточно большое значение для полного раскрытия */
+            transition: max-height 0.6s ease-in;
+            margin-top: 25px;
+        }
+        .news-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .patch-list, .news-list {
+            margin: 20px 0 20px 30px;
+        }
+        .patch-list li, .news-list li {
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+        .patch-list li strong, .news-list li strong {
+            color: #AABDD7;
+        }
+
+        /* ---------- ФУТЕР ---------- */
+        .geeks-realm-layout {
+            width: 1440px;
+            height: 718px;
+            margin: 0 auto;
+            margin-top: 100px;
+            background-color: #1a1a1a;
+            font-family: 'JejuGothic', sans-serif;
+            color: #ffffff;
+            box-sizing: border-box;
+            display: block;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+        .geeks-footer-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 80px;
+            box-sizing: border-box;
+        }
+        .footer-line {
+            width: 100%;
+            height: 2px;
+            background-color: #3d3d3d;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+        .footer-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-name {
+            font-size: 32px;
+            color: #a4a4b2;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+        .brand-logo { height: 50px; vertical-align: middle; }
+        .footer-sub-form {
+            display: flex;
+            background-color: #212635;
+            border-radius: 4px;
+            width: 650px;
+            transition: background-color 0.3s ease;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            flex-grow: 1;
+        }
+        .icon-mail { height: 20px; }
+        .input-group input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 18px;
+            width: 100%;
+            outline: none;
+            transition: color 0.2s ease;
+        }
+        .footer-sub-form button {
+            background-color: #5578ab;
+            color: white;
+            border: none;
+            padding: 0 40px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        .footer-main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .links-wrapper { display: flex; gap: 80px; }
+        .links-block {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 25px 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .links-block a {
+            display: flex;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+            transition: color 0.2s ease;
+        }
+        .footer-apps-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 30px;
+        }
+        .store-links img { height: 55px; margin-left: 15px; }
+        .join-label {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 35px;
+            border-radius: 40px;
+            letter-spacing: 2px;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .copy-pill {
+            background-color: #2a2a2a;
+            padding: 10px 35px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #888;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+        .social-group a { margin-left: 25px; }
+        .social-group img { height: 50px; }
+
+        /* ---------- Модальные окна ---------- */
+        .notification-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        .notification-modal-content {
+            background-color: #1a1a1a;
+            padding: 30px 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .notification-modal-text {
+            font-size: 20px;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+        .notification-modal-close {
+            background-color: #5578ab;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .notification-modal-close:hover {
+            background-color: #3a5a8a;
+        }
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .image-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+        }
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.5);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .image-modal-close:hover {
+            background: rgba(0,0,0,0.9);
+            color: #AABDD7;
+        }
+
+        /* ---------- СВЕТЛАЯ ТЕМА ---------- */
+        body.light-theme {
+            background-color: #f5f5f7;
+        }
+        body.light-theme .site-container {
+            background-color: #ffffff;
+        }
+        body.light-theme .header {
+            background-color: #e9e9ef;
+            box-shadow: inset 11px 9px 33.3px -12px rgba(0,0,0,0.15);
+        }
+        body.light-theme .logo,
+        body.light-theme .nav a {
+            color: #1e1e2a;
+        }
+        body.light-theme .icon-btn {
+            color: #2c2c38;
+            background-color: rgba(0,0,0,0.05);
+        }
+        body.light-theme .icon-btn:hover {
+            color: #000;
+            background-color: rgba(0,0,0,0.15);
+        }
+        body.light-theme .main-content {
+            color: #1a1a1a;
+        }
+        body.light-theme .geeks-realm-layout {
+            background-color: #eaeef5;
+            color: #111;
+        }
+        body.light-theme .footer-line {
+            background-color: #b0b0b8;
+        }
+        body.light-theme .brand-name {
+            color: #2c2c3a;
+        }
+        body.light-theme .footer-sub-form {
+            background-color: #d0d4e0;
+        }
+        body.light-theme .input-group input {
+            color: #111;
+        }
+        body.light-theme .footer-sub-form button {
+            background-color: #3a6a9a;
+        }
+        body.light-theme .links-block {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        body.light-theme .links-block a {
+            color: #1a1a2a;
+        }
+        body.light-theme .join-label {
+            background: rgba(0, 0, 0, 0.05);
+            color: #222;
+        }
+        body.light-theme .copy-pill {
+            background-color: #d0d0d8;
+            color: #333;
+        }
+        body.light-theme .notification-modal-content {
+            background-color: #f0f0f5;
+            border-color: rgba(0,0,0,0.1);
+        }
+        body.light-theme .notification-modal-text {
+            color: #1a1a2a;
+        }
+        body.light-theme .image-modal-content {
+            background: #f0f0f5;
+        }
+        body.light-theme .image-modal-close {
+            color: #1a1a2a;
+            background: rgba(255,255,255,0.5);
+        }
+        body.light-theme .image-modal-close:hover {
+            background: rgba(255,255,255,0.9);
+        }
+    </style>
+</head>
+<body>
+<div class="site-container">
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" alt="logo" style="height:50px;">
+            <div class="logo">Geek's Realm</div>
+        </a>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="games.html">Обзоры</a></li>
+                <li><a href="guides.html">Гайды</a></li>
+                <li><a href="forum.html">Форум</a></li>
+            </ul>
+        </nav>
+        <div class="buttons">
+            <a href="profile.html" class="icon-btn" aria-label="Профиль"><i class="fas fa-user"></i></a>
+            <button class="icon-btn" aria-label="Уведомления"><i class="fas fa-bell"></i></button>
+            <button class="icon-btn theme-toggle" aria-label="Настройки"><i class="fas fa-cog"></i></button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> → Новости
+        </div>
+
+        <!-- НОВОСТЬ 0: ПОЧЕМУ ЗВЕЗДНОЕ ДИТЯ НЕ... (MASS EFFECT) - САМАЯ СВЕЖАЯ -->
+        <div class="news-card" id="news-mass-effect">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>Почему звездное дитя не даёт покоя фанатам Mass Effect даже спустя 14 лет</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 29 мая 2026
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 1 час назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">Mass Effect</span>
+                <span class="tag">Звёздное дитя</span>
+                <span class="tag">BioWare</span>
+                <span class="tag">Фанатские теории</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>14 лет прошло с выхода Mass Effect 3, но финальный диалог с таинственным «Звёздным дитя» — аватаром Катализатора — до сих пор вызывает жаркие споры. Недавно в сеть слили ранние наброски сценария, где у игрока был четвёртый, «идеалистический» вариант концовки. Разбираемся, почему этот призрак до сих пор мучает фанатов.</p>
+                    <p><strong>В чём суть Звёздного дитя?</strong> В оригинале оно объясняет, что органическая жизнь всегда будет создавать синтетическую, которая в итоге уничтожит создателей. Жнецы — «решение» этой проблемы. Игроку предлагают три варианта: контроль, уничтожение или синтез. Но многие фанаты считают, что логика Дитя дырявая, а его появление — сценарный просчёт.</p>
+                    <p><strong>Новые слитые материалы:</strong></p>
+                    <ul class="patch-list">
+                        <li><strong>📜 Альтернативная концовка «Отказ от ложного выбора»</strong> – Шепард мог разоблачить Дитя как иллюзию, после чего запустить «истинный» план по отключению Жнецов без жертв.</li>
+                        <li><strong>🧠 Расширенная психологическая дуга</strong> – ранние версии показывали, что Дитя — это проекция разума Шепарда, а не реальное существо.</li>
+                        <li><strong>🎭 Фан-проект «Mass Effect: Legendary Cut»</strong> – моддеры уже создают патч, возвращающий удалённые диалоги и меняющий финал.</li>
+                        <li><strong>🗣️ Заявление разработчика</strong> – бывший сценарист BioWare, Патрик Уикс, в интервью 2025 года признал: «Мы слишком усложнили финал. Звёздное дитя должно было быть не решением, а загадкой».</li>
+                    </ul>
+                    <p><strong>Реакция сообщества:</strong> хэштег #StarChildRises снова в топе твиттера. Игроки перепроходят трилогию в поисках намёков. Студия BioWare пока хранит молчание, но инсайдеры утверждают, что в новой Mass Effect (кодовое имя «Nexus») появятся отсылки к Катализатору и, возможно, переосмысление его роли.</p>
+                    <p>«Звёздное дитя — самый ненавидимый и самый обсуждаемый персонаж в истории BioWare. Мы всё ещё не уверены, что он олицетворяет: гениальную метафору или сюжетную ошибку», — пишет портал TheGamer.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- НОВОСТЬ 1: BATTLEFIELD 4 -->
+        <div class="news-card" id="news-bf4">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>Это самый настоящий “батл” за выживание: Battlefield 4 обновляется спустя 13 лет и ставит рекорды онлайна</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 28 мая 2026
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 3 часа назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">Battlefield 4</span>
+                <span class="tag">Неожиданное обновление</span>
+                <span class="tag">DICE</span>
+                <span class="tag">Рекорд онлайна</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>DICE вчера выпустила внезапный патч 1.35 для Battlefield 4 — спустя 13 лет после релиза! Исправлен критический баг с вылетами серверов, а также добавлена поддержка пользовательских модов. В результате онлайн игры подскочил до 27 000 игроков одновременно — это лучший показатель с 2018 года.</p>
+                    <p><strong>Что изменилось в патче 1.35:</strong></p>
+                    <ul class="patch-list">
+                        <li><strong>🛠️ Исправлена ошибка “Memory Leak”</strong> – игра перестала вылетать после 2-3 часов на картах вроде Golmud Railway и Siege of Shanghai.</li>
+                        <li><strong>🎮 Полноценная поддержка Steam Workshop</strong> – теперь можно скачивать пользовательские скины оружия, новые звуки и даже кастомные карты.</li>
+                        <li><strong>⚙️ Оптимизация для новых видеокарт</strong> – добавлен профиль для RTX 40 и 50 серий, FPS вырос на 40% в режиме 64 игроков.</li>
+                        <li><strong>🔊 Исправлен звук вертолётов</strong> – пропал легендарный “баг с приглушённым звуком” при быстром приближении к земле.</li>
+                        <li><strong>🏆 Новые достижения в Steam и EA App</strong> – три секретных ачивмента для тех, кто убьёт 1000 человек из дрона-камикадзе.</li>
+                    </ul>
+                    <p><strong>Реакция сообщества:</strong> за сутки количество полных серверов выросло с 50 до 450 по всему миру. Особенно много игроков на картах “Metro 2024” и “Operation Locker”. Твиттер разработчиков взорвался мемами про «BF4 бессмертен». DICE официально заявила, что это последнее обновление, но не исключает выпуска новых карт от фанатов, если популярность сохранится.</p>
+                    <p>«Мы просто хотели исправить один старый баг, который мучил игроков почти десятилетие. А получили настоящий “батл” за звание лучшей части серии. Спасибо, что не забываете эту игру!» — написал в блоге технический директор DICE.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Cyberpunk 2077 -->
+        <div class="news-card" id="news1">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>Cyberpunk 2077 — патч 2.21 «Фантомная свобода: финальные правки»</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 27 мая 2026
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 6 часа назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">Cyberpunk 2077</span>
+                <span class="tag">Обновление</span>
+                <span class="tag">Патч-ноут</span>
+                <span class="tag">CD Projekt RED</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>CD Projekt RED выпустила масштабное обновление 2.21 для Cyberpunk 2077, которое фокусируется на улучшении производительности, исправлении ошибок и добавлении долгожданных функций. Патч доступен на всех платформах (PC, PS5, Xbox Series X|S).</p>
+                    <p><strong>Что нового:</strong></p>
+                    <ul class="patch-list">
+                        <li><strong>➕ Новая система фракций</strong> – репутация с бандами теперь влияет на диалоги и доступ к уникальным заданиям. Появились «уличные войны» между группировками в Найт-Сити.</li>
+                        <li><strong>⚙️ Полная поддержка AMD FSR 3.0 и Intel XeSS 1.3</strong> – повышение производительности до 40% на совместимом железе.</li>
+                        <li><strong>🚗 Редактор внешности автомобилей</strong> – можно менять цвет, обвесы и нитро-ускорение почти для всех машин.</li>
+                        <li><strong>🗣️ Новые диалоги с Панам, Джуди и Керри</strong> – добавлены романтические сцены и дополнительные квесты после финала.</li>
+                        <li><strong>🏙️ Улучшенный ИИ врагов и полиции</strong> – банды теперь вызывают подкрепления, а полиция использует тактику флангового обхода.</li>
+                    </ul>
+                    <p><strong>Исправления и оптимизация:</strong></p>
+                    <ul class="patch-list">
+                        <li>✅ Исправлен вылет при быстром перемещении в районе Китайского квартала.</li>
+                        <li>✅ Починили квест «Грёзы» – теперь предмет «галлюциноген» не пропадает из инвентаря.</li>
+                        <li>✅ Улучшена стабильность трассировки лучей (RTX) на видеокартах NVIDIA 40-й серии.</li>
+                        <li>✅ Исправлены баги с анимацией персонажей в кат-сценах DLC «Призрачная свобода».</li>
+                        <li>✅ Ускорена загрузка сохранений на 20%.</li>
+                    </ul>
+                    <p>«Это последнее крупное обновление перед полноценным переходом команды к следующей игре, – заявил Павел Саско из CDPR. – Мы благодарим всех игроков за поддержку и надеемся, что патч 2.21 сделает игру ещё лучше».</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Kingdom Come: Deliverance II -->
+        <div class="news-card" id="news2">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>Kingdom Come: Deliverance II — релиз намечен на ноябрь 2025</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 26 мая 2026
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 1 день назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">Kingdom Come: Deliverance II</span>
+                <span class="tag">Релиз</span>
+                <span class="tag">Дата выхода</span>
+                <span class="tag">Warhorse Studios</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>Warhorse Studios официально объявила, что долгожданное продолжение исторической RPG выйдет в ноябре 2025 года. Игра будет доступна на PC, PlayStation 5 и Xbox Series X|S.</p>
+                    <p><strong>Подробности:</strong></p>
+                    <ul class="news-list">
+                        <li><strong>🗺️ Огромный открытый мир</strong> – территория в два раза больше, чем в первой части. Добавлен Прага с её готическими улочками и настоящий замок Карлштейн.</li>
+                        <li><strong>⚔️ Новая боевая система</strong> – динамичные сражения, возможность верховой езды с атаками на скаку, осадные машины.</li>
+                        <li><strong>🎭 Глубокая RPG-механика</strong> – репутация среди сословий, крафт с элементами мини-игр, разветвлённый диалог.</li>
+                        <li><strong>🕹️ Геймплейные инновации</strong> – система строительства собственного поместья, возможность нанимать слуг и отряды.</li>
+                    </ul>
+                    <p>Предзаказы откроются в сентябре 2025. Игроков, купивших специальное издание, ждёт цифровой артбук и внутриигровой сет доспехов гуситского воина.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Monster Hunter Wilds -->
+        <div class="news-card" id="news3">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>Monster Hunter Wilds: открытая бета в августе, новая локация «Каньон молний»</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 25 мая 2026
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 2 дня назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">Monster Hunter Wilds</span>
+                <span class="tag">Бета-тест</span>
+                <span class="tag">Capcom</span>
+                <span class="tag">Локация</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>Capcom анонсировала открытое бета-тестирование Monster Hunter Wilds, которое пройдёт с 15 по 22 августа 2026 года. Участники смогут опробовать новый регион «Каньон молний» и сразиться с боссом – Рейдараком, генерирующим электрические бури.</p>
+                    <p><strong>Особенности беты:</strong></p>
+                    <ul class="news-list">
+                        <li>🎮 Играбельные классы: все 14 видов оружия, включая новый «Клинок-кнут».</li>
+                        <li>🤝 Кооператив до 4 игроков с мгновенным матчмейкингом.</li>
+                        <li>⚡ Динамическая погода, влияющая на поведение монстров.</li>
+                        <li>🏆 Участие в бете даст эксклюзивный набор стикеров и талисман в полной версии.</li>
+                    </ul>
+                    <p>Также разработчики показали трейлер сражения с гигантским летающим левиафаном – Громокрылом. Релиз игры намечен на начало 2027 года.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Borderlands 4 -->
+        <div class="news-card" id="news4">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>Borderlands 4: новый трейлер и класс «Техномант»</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 24 мая 2026
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 3 дня назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">Borderlands 4</span>
+                <span class="tag">Геймплей</span>
+                <span class="tag">Новый класс</span>
+                <span class="tag">Gearbox</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>Gearbox Software представила свежий геймплейный трейлер Borderlands 4, в котором показала нового охотника за хранилищами – Техноманта. Этот персонаж управляет нано-дронами, способными чинить союзников и взламывать вражеские турели.</p>
+                    <p><strong>Ключевые моменты трейлера:</strong></p>
+                    <ul class="news-list">
+                        <li>🔫 Миллиарды вариантов оружия с процедурной генерацией. В этом году – более 30 уникальных легендарок.</li>
+                        <li>🚀 Открытый мир на новой планете X-23, где можно перемещаться на мотоциклах и летающих кораблях.</li>
+                        <li>🤖 Кооператив до 4 игроков с возможностью делить добычу по ролям.</li>
+                        <li>🎬 Сюжет: поиск артефакта Древних, который может переписать историю галактики.</li>
+                    </ul>
+                    <p>Предзаказы стартуют 1 июня. Владельцы издания Vault Hunter Edition получат доступ к бете за два месяца до релиза.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. DOOM: The Dark Ages -->
+        <div class="news-card" id="news5">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>DOOM: The Dark Ages — геймплей с драконом и новым арбалетом</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 23 мая 2026
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 4 дня назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">DOOM: The Dark Ages</span>
+                <span class="tag">Геймплей</span>
+                <span class="tag">id Software</span>
+                <span class="tag">Новости</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>id Software показала 12 минут геймплея DOOM: The Dark Ages, где игроки смогут оседлать огнедышащего дракона и использовать разрушительный арбалет, стреляющий сгустками адской энергии.</p>
+                    <p><strong>Особенности геймплея:</strong></p>
+                    <ul class="news-list">
+                        <li>🐉 Верховая езда на драконе: уничтожение демонических башен, воздушные бои и поддержка наземных войск.</li>
+                        <li>🏹 Арбалет-пушка «Разрушитель»: пробивает врагов насквозь и пригвождает их к стенам.</li>
+                        <li>⚔️ Новые добивания: казни с использованием средневекового оружия – двуручных мечей, цепов и боевых топоров.</li>
+                        <li>🕹️ Уровни с секретами: исследование древних склепов, сбор рунических камней для усиления оружия.</li>
+                    </ul>
+                    <p>Релиз запланирован на 2026 год. Игру можно будет пройти в кооперативе или в одиночку с новым уровнем сложности «Безумие Палача».</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Pathologic 3 -->
+        <div class="news-card" id="news6">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>Pathologic 3: геймплейный трейлер, системные требования и дата выхода</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 22 мая 2026
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 5 дней назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">Pathologic 3</span>
+                <span class="tag">Трейлер</span>
+                <span class="tag">Системные требования</span>
+                <span class="tag">Ice-Pick Lodge</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>Ice-Pick Lodge опубликовала сюжетный трейлер Pathologic 3, а также раскрыла системные требования и примерную дату выхода – начало 2027 года. Игра станет финальным актом трилогии, разгадывающим природу Чумы и Степи.</p>
+                    <p><strong>Минимальные требования:</strong></p>
+                    <ul class="news-list">
+                        <li>ОС: Windows 10 (64-bit)</li>
+                        <li>Процессор: Intel Core i5-8400 / AMD Ryzen 5 2600</li>
+                        <li>Память: 16 ГБ ОЗУ</li>
+                        <li>Видеокарта: NVIDIA GeForce GTX 1060 6GB / AMD Radeon RX 580 8GB</li>
+                        <li>Место на диске: 60 ГБ SSD</li>
+                    </ul>
+                    <p><strong>Рекомендованные:</strong></p>
+                    <ul class="news-list">
+                        <li>ОС: Windows 11 (64-bit)</li>
+                        <li>Процессор: Intel Core i7-10700K / AMD Ryzen 7 3700X</li>
+                        <li>Память: 32 ГБ ОЗУ</li>
+                        <li>Видеокарта: NVIDIA GeForce RTX 2070 Super / AMD Radeon RX 6700 XT</li>
+                        <li>Место на диске: 60 ГБ NVMe SSD</li>
+                    </ul>
+                    <p>В трейлере показаны кадры геймплея: лечение пациентов с помощью новых инструментов, исследование заброшенных лабораторий и диалоги с таинственным Хозяином города. Разработчики обещают нелинейный сюжет с 3 основными концовками.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- НОВОСТЬ 8: НОВЫЙ ГОД УЖЕ БЛИЗКО, УСПЕЙ... (ПРАЗДНИЧНАЯ) -->
+        <div class="news-card" id="news-newyear">
+            <div class="news-card-header">
+                <div class="news-title-section">
+                    <h2>Новый год уже близко, успей: мега-скидки в Steam, Epic Games и праздничные ивенты</h2>
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 29 декабря 2025
+                        <i class="far fa-clock" style="margin-left: 15px;"></i> 6 месяцев назад
+                    </div>
+                </div>
+                <div class="expand-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="news-tags">
+                <span class="tag">Новый год</span>
+                <span class="tag">Скидки</span>
+                <span class="tag">Steam</span>
+                <span class="tag">Праздничные ивенты</span>
+            </div>
+            <div class="news-expandable-content">
+                <div class="news-content">
+                    <p>До Нового года остались считанные дни, а это значит — время гигантских распродаж и эксклюзивных внутриигровых событий. Steam Winter Sale, Epic Games Holiday Giveaway и раздачи в GOG уже стартовали. Успейте пополнить библиотеку и получить тонны праздничного лута!</p>
+                    <p><strong>Главные предложения платформ:</strong></p>
+                    <ul class="patch-list">
+                        <li><strong>🎄 Steam Winter Sale (до 5 января)</strong> – скидки до 90% на тысячи игр. Лучшие предложения: Cyberpunk 2077 (-60%), Baldur's Gate 3 (-40%), Elden Ring (-50%), Counter-Strike 2 коллекционные наборы (-33%). Ежедневные бесплатные стикеры и рамки профиля.</li>
+                        <li><strong>🎁 Epic Games Store</strong> – каждый день новая бесплатная игра. Сегодня раздают Death Stranding Director's Cut, завтра — Control Ultimate Edition. В канун Нового года ожидается анонс секретного подарка от создателей Fortnite.</li>
+                        <li><strong>⭐ GOG.COM</strong> – зимняя распродажа DRM-free. Ведьмак 3 за 299 рублей, коллекция Fallout за 999 рублей. Плюс подарок за покупку от 1500 рублей — цифровой артбук «Игры навсегда».</li>
+                        <li><strong>📱 Мобильные игры</strong> – в Genshin Impact, Honkai: Star Rail и PUBG Mobile проходят новогодние ивенты с гарантированными легендарками и пиротехникой.</li>
+                    </ul>
+                    <p><strong>Праздничные внутриигровые события (декабрь-январь):</strong></p>
+                    <ul class="news-list">
+                        <li>❄️ World of Warcraft: «Сезон открытий» — боссы в новогодних шапках, дроп с двойным шансом на эпики.</li>
+                        <li>🎮 Fortnite: зимний фестиваль с бесплатным скином «Ледяной король 2.0» и фейерверками на острове.</li>
+                        <li>🚗 Forza Horizon 5: снежная трасса «Горный серпантин», эксклюзивный автомобиль за прохождение зимних гонок.</li>
+                        <li>⚔️ Dota 2: новогоднее обновление «Frostivus 2026» — новый режим «Бой с декабрьским демоном», сундуки с редкими сетами.</li>
+                    </ul>
+                    <p><strong>Совет редакции:</strong> не тяните до последнего — популярные игры разбирают мгновенно, а бесплатные раздачи ограничены по времени. Создайте список желаемого, следите за флеш-распродажами и не забудьте заглянуть в раздел «скрытые жемчужины» со скидкой -80%.</p>
+                    <p>«Новый год — время чудес и больших скидок. Пусть ваш кошелёк немного похудеет, зато библиотека Steam поправится», — шутят в официальном блоге Valve.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="geeks-realm-layout">
+        <footer class="geeks-footer-container">
+            <div class="footer-header-row">
+                <div class="footer-brand">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <img src="images/logo.png" alt="" class="brand-logo">
+                        <span class="brand-name">Geek's Realm</span>
+                    </a>
+                </div>
+                <div class="footer-sub-form">
+                    <div class="input-group">
+                        <img src="images/Vector.png" alt="" class="icon-mail">
+                        <input type="text" placeholder="Введите свою почту, чтобы получать последние новости">
+                    </div>
+                    <button type="button">Отправить</button>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-main-content">
+                <div class="links-wrapper">
+                    <div class="links-block">
+                        <a href="news.html">Новости</a>
+                        <a href="#">Статьи</a>
+                        <a href="guides.html">Видео</a>
+                    </div>
+                    <div class="links-block">
+                        <a href="https://www.twitch.tv/directory" target="_blank" rel="noopener noreferrer">Стримы</a>
+                        <a href="#" id="contactsLink">Контакты</a>
+                        <a href="rules.html">Правила сооб-ва</a>
+                    </div>
+                    <div class="links-block">
+                        <a href="cheats.html">Читы</a>
+                        <a href="games.html">Игры</a>
+                        <a href="#">Блоги</a>
+                    </div>
+                </div>
+                <div class="footer-apps-section">
+                    <div class="store-links">
+                        <img src="images/Group.png" alt="App Store">
+                        <img src="images/Vector1.png" alt="Google Play">
+                    </div>
+                    <p class="join-label">Присоединяйтесь к нам</p>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-bottom-row">
+                <div class="copy-pill">CompanyName @ 202X. All rights reserved.</div>
+                <div class="social-group">
+                    <a href="#" id="telegramIcon"><img src="images/image 23.png" alt="TG"></a>
+                    <a href="#" id="instagramIcon"><img src="images/image 24.png" alt="INST"></a>
+                    <a href="#" id="youtubeIcon"><img src="images/image 25.png" alt="YT"></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<div id="notificationModal" class="notification-modal">
+    <div class="notification-modal-content">
+        <i class="fas fa-bell" style="font-size: 40px; margin-bottom: 15px; color: #AABDD7;"></i>
+        <p class="notification-modal-text">У вас пока нет новых сообщений.</p>
+        <button class="notification-modal-close">Закрыть</button>
+    </div>
+</div>
+
+<div id="imageModal" class="image-modal">
+    <div class="image-modal-content">
+        <span class="image-modal-close">&times;</span>
+        <img id="modalImage" src="" alt="Telegram">
+    </div>
+</div>
+
+<script>
+    (function() {
+        const themeToggleBtn = document.querySelector('.theme-toggle');
+        if (themeToggleBtn) {
+            function setTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-theme');
+                    localStorage.setItem('geeks-theme', 'light');
+                } else {
+                    document.body.classList.remove('light-theme');
+                    localStorage.setItem('geeks-theme', 'dark');
+                }
+            }
+            const savedTheme = localStorage.getItem('geeks-theme');
+            if (savedTheme === 'light') setTheme('light');
+            else if (savedTheme === 'dark') setTheme('dark');
+            else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+            themeToggleBtn.addEventListener('click', () => {
+                const isLight = document.body.classList.contains('light-theme');
+                setTheme(isLight ? 'dark' : 'light');
+            });
+        }
+
+        const bellBtn = document.querySelector('.icon-btn[aria-label="Уведомления"]');
+        const modal = document.getElementById('notificationModal');
+        const closeModal = document.querySelector('.notification-modal-close');
+        if (bellBtn && modal) {
+            bellBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
+        }
+        if (closeModal) {
+            closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+        }
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
+        const tgIcon = document.getElementById('telegramIcon');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeImageBtn = document.querySelector('.image-modal-close');
+        if (tgIcon) {
+            tgIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                modalImage.src = 'images/image228.jpg';
+                imageModal.style.display = 'flex';
+            });
+        }
+        if (closeImageBtn) {
+            closeImageBtn.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+                modalImage.src = '';
+            });
+        }
+        window.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.style.display = 'none';
+                modalImage.src = '';
+            }
+        });
+
+        const instIcon = document.getElementById('instagramIcon');
+        if (instIcon) {
+            instIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'https://www.instagram.com/go.lub97/';
+            });
+        }
+
+        const ytIcon = document.getElementById('youtubeIcon');
+        if (ytIcon) {
+            ytIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'https://youtube.com/';
+            });
+        }
+
+        const submitBtn = document.querySelector('.footer-sub-form button');
+        if (submitBtn) {
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Спасибо, что поддерживаете нас! Теперь мы будем присылать вам самые свежие новости из мира игр!');
+            });
+        }
+
+        const contactsLink = document.getElementById('contactsLink');
+        if (contactsLink) {
+            contactsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Наша почта- okva5@bk.ru');
+            });
+        }
+
+        const newsCards = document.querySelectorAll('.news-card');
+        newsCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                card.classList.toggle('expanded');
+            });
+        });
+    })();
+</script>
+</body>
+</html>

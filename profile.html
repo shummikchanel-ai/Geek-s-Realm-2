@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет — Geek's Realm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ---------- RESET & GLOBAL ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', 'Malgun Gothic', sans-serif;
+            line-height: 1.4;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .site-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background-color: #000000;
+            transition: background-color 0.3s ease;
+            position: relative;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: #201E1E;
+            box-shadow: inset 11px 9px 33.3px -12px #DFC4C4;
+            padding: 56px 149px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .logo {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: #A1A2BF;
+            white-space: nowrap;
+        }
+
+        .nav {
+            margin-left: 69px;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 42px;
+        }
+
+        .nav a {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 18px;
+            color: #AABDD7;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: #d0e2ff;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #A1A2BF;
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.25s ease;
+            background-color: rgba(161, 162, 191, 0.05);
+            text-decoration: none;
+        }
+
+        .icon-btn i {
+            font-size: 22px;
+            pointer-events: none;
+        }
+
+        .icon-btn:hover {
+            color: #ffffff;
+            background-color: rgba(161, 162, 191, 0.2);
+        }
+
+        /* ---------- КАРТОЧКА ПРОФИЛЯ С ФОНОМ MASK GROUP ---------- */
+        .profile-container {
+            padding: 60px 149px 100px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-card {
+            position: relative;
+            border-radius: 40px;
+            padding: 48px 40px;
+            overflow: hidden;
+            /* Фон — изображение Mask group.png */
+            background-image: url('images/Mask group.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Затемнение для читаемости текста */
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+        }
+
+        /* Псевдоэлемент для затемнения/осветления поверх картинки */
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.65); /* тёмный оверлей для тёмной темы */
+            border-radius: 40px;
+            z-index: 1;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Контент карточки — выше оверлея */
+        .profile-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-avatar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .avatar-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #2a2a2a;
+            border: 3px solid #AABDD7;
+            margin-bottom: 16px;
+        }
+
+        .avatar-label {
+            background-color: rgba(170, 189, 215, 0.2);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #AABDD7;
+            transition: all 0.2s ease;
+        }
+
+        .avatar-label:hover {
+            background-color: rgba(170, 189, 215, 0.4);
+        }
+
+        #avatar-input {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            color: #AABDD7;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: rgba(13, 12, 12, 0.7);
+            border: 1px solid rgba(46, 43, 43, 0.8);
+            border-radius: 16px;
+            padding: 14px 20px;
+            font-family: inherit;
+            font-size: 16px;
+            color: #E0E0E0;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #AABDD7;
+            box-shadow: 0 0 0 2px rgba(170, 189, 215, 0.2);
+        }
+
+        .save-btn {
+            background: #AABDD7;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: inherit;
+            color: #111;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .save-btn:hover {
+            background: #c0d4f0;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #A1A2BF;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #7ed6b0;
+        }
+
+        /* ---------- СВЕТЛАЯ ТЕМА ---------- */
+        body.light-theme {
+            background-color: #f5f5f7;
+        }
+
+        body.light-theme .site-container {
+            background-color: #ffffff;
+        }
+
+        body.light-theme .header {
+            background-color: #e9e9ef;
+            box-shadow: inset 11px 9px 33.3px -12px rgba(0,0,0,0.15);
+        }
+
+        body.light-theme .logo,
+        body.light-theme .nav a {
+            color: #1e1e2a;
+        }
+
+        body.light-theme .nav a:hover {
+            color: #3a3a4a;
+        }
+
+        body.light-theme .icon-btn {
+            color: #2c2c38;
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        body.light-theme .icon-btn:hover {
+            color: #000;
+            background-color: rgba(0,0,0,0.15);
+        }
+
+        /* В светлой теме оверлей карточки — светлый, с прозрачностью */
+        body.light-theme .profile-card::before {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        body.light-theme .form-group input {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: #c0c0ca;
+            color: #1a1a1a;
+        }
+
+        body.light-theme .form-group label {
+            color: #2c2c3a;
+        }
+
+        body.light-theme .save-btn {
+            background: #3a6a9a;
+            color: #fff;
+        }
+
+        body.light-theme .save-btn:hover {
+            background: #2c527a;
+        }
+
+        body.light-theme .back-link {
+            color: #2c2c38;
+        }
+
+        body.light-theme .back-link:hover {
+            color: #000;
+        }
+
+        body.light-theme .avatar-label {
+            color: #2c2c3a;
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        body.light-theme .avatar-label:hover {
+            background-color: rgba(0,0,0,0.15);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 980px) {
+            .header {
+                padding: 28px 40px;
+                flex-wrap: wrap;
+                row-gap: 24px;
+            }
+            .nav {
+                margin-left: 0;
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+            .nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+            .profile-container {
+                padding: 40px 24px 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="site-container">
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" alt="logo" style="height:50px;">
+            <div class="logo">Geek's Realm</div>
+        </a>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="games.html">Обзоры</a></li>
+                <li><a href="guides.html">Гайды</a></li>
+                <li><a href="forum.html">Форум</a></li>
+            </ul>
+        </nav>
+        <div class="buttons">
+            <a href="profile.html" class="icon-btn" aria-label="Профиль"><i class="fas fa-user"></i></a>
+            <button class="icon-btn" aria-label="Уведомления"><i class="fas fa-bell"></i></button>
+            <button class="icon-btn theme-toggle" aria-label="Настройки"><i class="fas fa-cog"></i></button>
+        </div>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-avatar">
+                <img id="avatar-img" class="avatar-preview" src="https://via.placeholder.com/120?text=Avatar" alt="Аватар">
+                <label for="avatar-input" class="avatar-label">Выбрать аватар</label>
+                <input type="file" id="avatar-input" accept="image/png, image/jpeg, image/jpg">
+            </div>
+
+            <div class="form-group">
+                <label>Имя</label>
+                <input type="text" id="name-input" placeholder="Ваше имя">
+            </div>
+            <div class="form-group">
+                <label>Никнейм</label>
+                <input type="text" id="nickname-input" placeholder="@nickname">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email-input" placeholder="your@email.com">
+            </div>
+
+            <button class="save-btn" id="save-profile">Сохранить изменения</button>
+            <div id="message" class="message"></div>
+            <a href="index.html" class="back-link">← Вернуться на главную</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Тёмная/светлая тема
+        const themeToggleBtn = document.querySelector('.theme-toggle');
+        function setTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.add('light-theme');
+                localStorage.setItem('geeks-theme', 'light');
+            } else {
+                document.body.classList.remove('light-theme');
+                localStorage.setItem('geeks-theme', 'dark');
+            }
+        }
+        const savedTheme = localStorage.getItem('geeks-theme');
+        if (savedTheme === 'light') setTheme('light');
+        else if (savedTheme === 'dark') setTheme('dark');
+        else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const isLight = document.body.classList.contains('light-theme');
+                setTheme(isLight ? 'dark' : 'light');
+            });
+        }
+
+        // Работа с профилем
+        const STORAGE_KEY = 'geeks_user_profile';
+
+        const avatarImg = document.getElementById('avatar-img');
+        const avatarInput = document.getElementById('avatar-input');
+        const nameInput = document.getElementById('name-input');
+        const nicknameInput = document.getElementById('nickname-input');
+        const emailInput = document.getElementById('email-input');
+        const saveBtn = document.getElementById('save-profile');
+        const messageDiv = document.getElementById('message');
+
+        function loadProfile() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const profile = JSON.parse(saved);
+                    nameInput.value = profile.name || '';
+                    nicknameInput.value = profile.nickname || '';
+                    emailInput.value = profile.email || '';
+                    if (profile.avatar) {
+                        avatarImg.src = profile.avatar;
+                    } else {
+                        avatarImg.src = 'https://via.placeholder.com/120?text=Avatar';
+                    }
+                } catch(e) {}
+            } else {
+                nameInput.value = 'Игрок';
+                nicknameInput.value = '@geek';
+                emailInput.value = 'geek@example.com';
+                avatarImg.src = 'https://via.placeholder.com/120?text=Avatar';
+            }
+        }
+
+        function saveProfile() {
+            const name = nameInput.value.trim();
+            const nickname = nicknameInput.value.trim();
+            const email = emailInput.value.trim();
+            const avatar = avatarImg.src;
+
+            if (!name) {
+                messageDiv.textContent = 'Имя не может быть пустым';
+                messageDiv.style.color = '#e67e7e';
+                setTimeout(() => messageDiv.textContent = '', 2000);
+                return;
+            }
+            if (!email || !email.includes('@')) {
+                messageDiv.textContent = 'Введите корректный email';
+                messageDiv.style.color = '#e67e7e';
+                setTimeout(() => messageDiv.textContent = '', 2000);
+                return;
+            }
+
+            const profile = { name, nickname, email, avatar };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+            messageDiv.textContent = '✅ Профиль успешно обновлён!';
+            messageDiv.style.color = '#7ed6b0';
+            setTimeout(() => messageDiv.textContent = '', 2000);
+        }
+
+        avatarInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg')) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    avatarImg.src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Пожалуйста, выберите PNG или JPEG изображение');
+            }
+        });
+
+        saveBtn.addEventListener('click', saveProfile);
+        loadProfile();
+    })();
+</script>
+</body>
+</html>

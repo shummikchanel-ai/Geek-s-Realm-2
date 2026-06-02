@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek's Realm — портал гика</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ---------- RESET & GLOBAL ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', 'Malgun Gothic', sans-serif;
+            line-height: 1.4;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .site-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background-color: #000000;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: #201E1E;
+            box-shadow: inset 11px 9px 33.3px -12px #DFC4C4;
+            padding: 56px 149px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .logo {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: #A1A2BF;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .nav {
+            margin-left: 69px;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 42px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav a {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 18px;
+            color: #AABDD7;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: #d0e2ff;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #A1A2BF;
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.25s ease;
+            background-color: rgba(161, 162, 191, 0.05);
+            text-decoration: none;
+        }
+
+        .icon-btn i {
+            font-size: 22px;
+            pointer-events: none;
+        }
+
+        .icon-btn:hover {
+            color: #ffffff;
+            background-color: rgba(161, 162, 191, 0.2);
+        }
+
+        /* ---------- ОСНОВНОЙ КОНТЕНТ ---------- */
+        .main-content {
+            padding: 60px 149px 100px;
+            color: #e0e0e0;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-block {
+            position: relative;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 327px;
+            overflow: visible;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-text {
+            position: absolute;
+            left: 138px;
+            bottom: 140px;
+            width: 461px;
+            height: 56px;
+            border-radius: 28px;
+            background: linear-gradient(90deg, rgba(51, 43, 43, 0) 0%, rgba(51, 43, 43, 0.45) 50%, rgba(51, 43, 43, 0) 100%);
+            box-shadow: inset -22px -10px 11.1px -6px rgba(0, 0, 0, 0.25);
+            font-family: 'Jersey 25', 'Courier New', monospace;
+            font-size: 20px;
+            line-height: 56px;
+            color: #C3D0DA;
+            text-align: left;
+            padding-left: 20px;
+            padding-right: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            transition: background 0.3s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .buttons-container {
+            position: relative;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 800px;
+        }
+
+        .square-button {
+            position: absolute;
+            width: 275px;
+            height: 275px;
+            border-radius: 30px;
+            background-color: #1D1B1D;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+        }
+
+        .square-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .absolute-texts {
+            position: relative;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 200px;
+        }
+
+        .text-abs {
+            position: absolute;
+            font-family: 'Jersey 25', 'Courier New', monospace;
+            font-size: 17px;
+            line-height: 0.5;
+            color: #D7D7D7;
+            text-align: center;
+            width: auto;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .positioned-rectangle {
+            position: absolute;
+            left: 0%;
+            top: 830px;
+            width: 1440px;
+            height: 701px;
+            background-color: #121111;
+            border-radius: 61px;
+            box-shadow: 20px 33px 77.9px -48px rgba(0, 0, 0, 0.5), inset 3px 12px 123.3px -54px rgba(0, 0, 0, 0.8);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-badge {
+            position: absolute;
+            width: 496px;
+            height: 104px;
+            background-color: #1D1B1D;
+            border-radius: 40px;
+            box-shadow: inset -12px -11px 57.6px 0 rgba(0, 0, 0, 0.5), inset 8px 9px 22.3px -16px #847CF4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-title {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 40px;
+            color: #AAB6C8;
+            letter-spacing: 0.1em;
+            transition: color 0.2s ease;
+        }
+
+        .custom-buttons-container {
+            position: relative;
+            width: 100%;
+            min-height: 1500px;
+        }
+
+        .custom-button {
+            position: absolute;
+            width: 195px;
+            height: 367px;
+            border-radius: 49px;
+            background-color: #d3d3d3;
+            box-shadow: 11px 14px 20.6px 0 rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+        }
+
+        .custom-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 11px 17px 22px 0 rgba(0, 0, 0, 0.85);
+        }
+
+        .rounded-box {
+            position: absolute;
+            left: 196px;
+            top: 1687px;
+            width: 461px;
+            height: 105px;
+            background-color: rgba(55, 66, 80, 0.49);
+            border-radius: 28px;
+            box-shadow: inset 10px 10px 19.8px -11px #5D5889, 20px 16px 46.6px -3px rgba(134, 97, 135, 0.25);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .main-content-label {
+            position: absolute;
+            left: 255px;
+            top: 1715px;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 40px;
+            color: #C1D3EE;
+            z-index: 21;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .gradient-rectangles {
+            position: relative;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .gradient-rect {
+            position: absolute;
+            top: -1410px;
+            width: 380px;
+            height: 1082px;
+            border-radius: 70px;
+            background: linear-gradient(to top right, #1B2046, #7D3B5A);
+            z-index: 1;
+            transition: background 0.3s ease;
+        }
+
+        .inner-rectangles {
+            position: relative;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .inner-rect {
+            position: absolute;
+            width: 323px;
+            height: 1035px;
+            border-radius: 70px;
+            background-color: rgba(116, 116, 116, 0.55);
+            box-shadow: inset 5px 7px 27.6px -6px rgba(233, 221, 238, 0.25);
+            z-index: 2;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .small-rect {
+            position: absolute;
+            width: 209px;
+            height: 49px;
+            border-radius: 49px;
+            background-color: rgba(147, 179, 228, 0.22);
+            z-index: 3;
+            transition: background-color 0.3s ease;
+        }
+
+        .heading-overlay {
+            position: absolute;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 18px;
+            color: #FFFFFF;
+            white-space: nowrap;
+            z-index: 30;
+            transition: color 0.2s ease;
+        }
+
+        .heading-1 { left: 120px; top: 2025px; }
+        .heading-2 { left: 655px; top: 2025px; }
+        .heading-3 { left: 1225px; top: 2025px; }
+
+        .photo-rectangles {
+            position: relative;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .photo-rect {
+            position: absolute;
+            width: 281px;
+            height: 157px;
+            border-radius: 20px;
+            background-color: #04010D;
+            overflow: hidden;
+            z-index: 25;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .photo-rect img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .review-text-block {
+            position: absolute;
+            left: 52px;
+            top: 2290px;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 23px;
+            line-height: 50px;
+            color: #A6B0B4;
+            text-align: left;
+            white-space: normal;
+            z-index: 25;
+            transition: color 0.2s ease;
+        }
+
+        .topics-list {
+            position: absolute;
+            left: 635px;
+            top: 2290px;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 23px;
+            line-height: 50px;
+            color: #A6B0B4;
+            text-align: left;
+            white-space: normal;
+            z-index: 25;
+            transition: color 0.2s ease;
+        }
+
+        .top-games-list {
+            position: absolute;
+            left: 1162px;
+            top: 2290px;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 23px;
+            line-height: 50px;
+            color: #A6B0B4;
+            text-align: left;
+            white-space: normal;
+            z-index: 25;
+            transition: color 0.2s ease;
+        }
+
+        .xcom-review {
+            position: absolute;
+            left: 57px;
+            top: 2670px;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 23px;
+            line-height: 50px;
+            color: #A6B0B4;
+            text-align: left;
+            white-space: normal;
+            z-index: 25;
+            transition: color 0.2s ease;
+        }
+
+        .button-rect {
+            position: absolute;
+            width: 163px;
+            height: 69px;
+            border-radius: 17.5px;
+            background-color: rgba(147, 179, 228, 0.22);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 20px;
+            box-sizing: border-box;
+            z-index: 30;
+            cursor: pointer;
+            transition: all 0.2s ease, background-color 0.3s ease;
+        }
+
+        .button-rect:hover {
+            background-color: rgba(147, 179, 228, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .button-text {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+            line-height: 50px;
+            color: #000000;
+            text-align: left;
+            transition: color 0.2s ease;
+        }
+
+        /* Футер */
+        .geeks-realm-layout {
+            width: 1440px;
+            height: 718px;
+            margin: 0 auto;
+            background-color: #1a1a1a;
+            font-family: 'JejuGothic', sans-serif;
+            color: #ffffff;
+            box-sizing: border-box;
+            display: block;
+            position: relative;
+            left: 0px;
+            top: -200px;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .geeks-footer-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 80px;
+            box-sizing: border-box;
+        }
+
+        .footer-line {
+            width: 100%;
+            height: 2px;
+            background-color: #3d3d3d;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-name {
+            font-size: 32px;
+            color: #a4a4b2;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .brand-logo { height: 50px; vertical-align: middle; }
+
+        .footer-sub-form {
+            display: flex;
+            background-color: #212635;
+            border-radius: 4px;
+            width: 650px;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            flex-grow: 1;
+        }
+
+        .icon-mail { height: 20px; }
+
+        .input-group input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 18px;
+            width: 100%;
+            outline: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-sub-form button {
+            background-color: #5578ab;
+            color: white;
+            border: none;
+            padding: 0 40px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .links-wrapper { display: flex; gap: 80px; }
+
+        .links-block {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 25px 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .links-block a {
+            display: flex;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-apps-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 30px;
+        }
+
+        .store-links img { height: 55px; margin-left: 15px; }
+
+        .join-label {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 35px;
+            border-radius: 40px;
+            letter-spacing: 2px;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-pill {
+            background-color: #2a2a2a;
+            padding: 10px 35px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #888;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .social-group a { margin-left: 25px; }
+        .social-group img { height: 50px; }
+
+        /* ---------- Модальное окно уведомлений ---------- */
+        .notification-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        .notification-modal-content {
+            background-color: #1a1a1a;
+            padding: 30px 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .notification-modal-text {
+            font-size: 20px;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+        .notification-modal-close {
+            background-color: #5578ab;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .notification-modal-close:hover {
+            background-color: #3a5a8a;
+        }
+        body.light-theme .notification-modal-content {
+            background-color: #f0f0f5;
+            border-color: rgba(0,0,0,0.1);
+        }
+        body.light-theme .notification-modal-text {
+            color: #1a1a2a;
+        }
+
+        /* ---------- Модальное окно для видео ---------- */
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+        }
+        .video-modal-content iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border: none;
+        }
+        .video-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.5);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .video-modal-close:hover {
+            background: rgba(0,0,0,0.9);
+            color: #AABDD7;
+        }
+
+        /* Светлая тема для видео-модалки */
+        body.light-theme .video-modal-content {
+            background: #f0f0f5;
+        }
+        body.light-theme .video-modal-close {
+            color: #1a1a2a;
+            background: rgba(255,255,255,0.5);
+        }
+        body.light-theme .video-modal-close:hover {
+            background: rgba(255,255,255,0.9);
+        }
+
+        /* ---------- Модальное окно для картинки (Telegram) ---------- */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .image-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+        }
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.5);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .image-modal-close:hover {
+            background: rgba(0,0,0,0.9);
+            color: #AABDD7;
+        }
+        body.light-theme .image-modal-content {
+            background: #f0f0f5;
+        }
+        body.light-theme .image-modal-close {
+            color: #1a1a2a;
+            background: rgba(255,255,255,0.5);
+        }
+        body.light-theme .image-modal-close:hover {
+            background: rgba(255,255,255,0.9);
+        }
+
+        /* ---------- СВЕТЛАЯ ТЕМА (остальное) ---------- */
+        body.light-theme {
+            background-color: #f5f5f7;
+        }
+        body.light-theme .site-container {
+            background-color: #ffffff;
+        }
+        body.light-theme .header {
+            background-color: #e9e9ef;
+            box-shadow: inset 11px 9px 33.3px -12px rgba(0,0,0,0.15);
+        }
+        body.light-theme .logo,
+        body.light-theme .nav a {
+            color: #1e1e2a;
+        }
+        body.light-theme .nav a:hover {
+            color: #3a3a4a;
+        }
+        body.light-theme .icon-btn {
+            color: #2c2c38;
+            background-color: rgba(0,0,0,0.05);
+        }
+        body.light-theme .icon-btn:hover {
+            color: #000;
+            background-color: rgba(0,0,0,0.15);
+        }
+        body.light-theme .main-content,
+        body.light-theme .hero p {
+            color: #1a1a1a;
+        }
+        body.light-theme .hero-text {
+            color: #1f2a36;
+            background: linear-gradient(90deg, rgba(200,200,210,0) 0%, rgba(200,200,210,0.6) 50%, rgba(200,200,210,0) 100%);
+            box-shadow: inset -22px -10px 11.1px -6px rgba(0,0,0,0.1);
+        }
+        body.light-theme .square-button {
+            background-color: #e0e0e6;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        body.light-theme .text-abs {
+            color: #2b2b35;
+        }
+        body.light-theme .positioned-rectangle {
+            background-color: #ececf0;
+            box-shadow: 20px 33px 77.9px -48px rgba(0,0,0,0.2), inset 3px 12px 123.3px -54px rgba(0,0,0,0.1);
+        }
+        body.light-theme .news-badge {
+            background-color: #d4d4dc;
+            box-shadow: inset -12px -11px 57.6px 0 rgba(0,0,0,0.1), inset 8px 9px 22.3px -16px #a0a0c0;
+        }
+        body.light-theme .news-title {
+            color: #2c2c3a;
+        }
+        body.light-theme .custom-button {
+            background-color: #c0c0ca;
+            box-shadow: 11px 14px 20.6px 0 rgba(0,0,0,0.15);
+        }
+        body.light-theme .rounded-box {
+            background-color: rgba(180, 190, 210, 0.7);
+            box-shadow: inset 10px 10px 19.8px -11px #b0b0c0, 20px 16px 46.6px -3px rgba(0,0,0,0.1);
+        }
+        body.light-theme .main-content-label {
+            color: #1e2a3a;
+        }
+        body.light-theme .gradient-rect {
+            background: linear-gradient(to top right, #b0b8d0, #e0a0b0);
+        }
+        body.light-theme .inner-rect {
+            background-color: rgba(200, 200, 210, 0.65);
+            box-shadow: inset 5px 7px 27.6px -6px rgba(0,0,0,0.1);
+        }
+        body.light-theme .small-rect {
+            background-color: rgba(80, 100, 140, 0.25);
+        }
+        body.light-theme .heading-overlay {
+            color: #1c1c26;
+        }
+        body.light-theme .photo-rect {
+            background-color: #dcdce4;
+        }
+        body.light-theme .review-text-block,
+        body.light-theme .topics-list,
+        body.light-theme .top-games-list,
+        body.light-theme .xcom-review {
+            color: #1a1a24;
+        }
+        body.light-theme .button-rect {
+            background-color: rgba(80, 100, 140, 0.25);
+        }
+        body.light-theme .button-text {
+            color: #111;
+        }
+        body.light-theme .geeks-realm-layout {
+            background-color: #eaeef5;
+            color: #111;
+        }
+        body.light-theme .geeks-footer-container .footer-line {
+            background-color: #b0b0b8;
+        }
+        body.light-theme .brand-name {
+            color: #2c2c3a;
+        }
+        body.light-theme .footer-sub-form {
+            background-color: #d0d4e0;
+        }
+        body.light-theme .input-group input {
+            color: #111;
+        }
+        body.light-theme .footer-sub-form button {
+            background-color: #3a6a9a;
+            color: #fff;
+        }
+        body.light-theme .links-block {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        body.light-theme .links-block a {
+            color: #1a1a2a;
+        }
+        body.light-theme .join-label {
+            background: rgba(0, 0, 0, 0.05);
+            color: #222;
+        }
+        body.light-theme .copy-pill {
+            background-color: #d0d0d8;
+            color: #333;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .buttons-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                margin-top: 520px;
+                min-height: auto;
+            }
+            .square-button {
+                position: static;
+                margin: 0 auto;
+            }
+            .absolute-texts {
+                position: static;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                margin-top: 100px;
+            }
+            .text-abs {
+                position: static;
+                white-space: normal;
+                text-align: center;
+                max-width: 90%;
+            }
+            .custom-buttons-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 37px;
+                margin-top: 1055px;
+                min-height: auto;
+            }
+            .custom-button {
+                position: static;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="site-container">
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" alt="logo" style="height:50px;">
+            <div class="logo">Geek's Realm</div>
+        </a>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="games.html">Обзоры</a></li>
+                <li><a href="guides.html">Гайды</a></li>
+                <li><a href="forum.html">Форум</a></li>
+            </ul>
+        </nav>
+        <div class="buttons">
+            <a href="profile.html" class="icon-btn" aria-label="Профиль"><i class="fas fa-user"></i></a>
+            <button class="icon-btn" aria-label="Уведомления"><i class="fas fa-bell"></i></button>
+            <button class="icon-btn theme-toggle" aria-label="Настройки"><i class="fas fa-cog"></i></button>
+        </div>
+    </header>
+
+    <img src="images/image 1.png" alt="banner" style="width:100%;">
+
+    <main class="main-content">
+        <div class="hero">
+            <div class="hero-block">
+                <div class="hero-image-wrapper">
+                    <div class="hero-text">
+                        Самые интересные релизы декабря
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons-container">
+                <div class="square-button" style="left: 0px; top: -450px;">
+                    <img src="images/image 5.png" alt="img" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="square-button" style="left: 455px; top: -450px;">
+                    <img src="images/image 2.png" alt="img" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="square-button" style="left: 907px; top: -450px;">
+                    <img src="images/image 3.png" alt="img" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+            </div>
+
+            <div class="absolute-texts">
+                <div class="text-abs" style="left: 0px; top: -950px;">Это самый настоящий “батл”...</div>
+                <div class="text-abs" style="left: 465px; top: -950px;">Почему звездное дитя не...</div>
+                <div class="text-abs" style="left: 900px; top: -950px;">Новый год уже близко, успей...</div>
+            </div>
+
+            <div class="positioned-rectangle">
+                <img src="images/Mask group1.png" alt="mask" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+
+            <div class="news-badge" style="left: 475px; top: 917px;">
+                <span class="news-title">Новинки</span>
+            </div>
+
+            <div class="custom-buttons-container">
+                <a href="cyberpunk.html" class="custom-button" style="left: -105px; top: -800px;">
+                    <img src="images/image 26.png" style="width:100%; height:100%; object-fit:cover;">
+                </a>
+                <a href="deliverance.html" class="custom-button" style="left: 127px; top: -800px;">
+                    <img src="images/image 22.png" style="width:100%; height:100%; object-fit:cover;">
+                </a>
+                <a href="monsterhunter.html" class="custom-button" style="left: 359px; top: -800px;">
+                    <img src="images/image 33.png" style="width:100%; height:100%; object-fit:cover;">
+                </a>
+                <a href="borderlands.html" class="custom-button" style="left: 591px; top: -800px;">
+                    <img src="images/image 44.png" style="width:100%; height:100%; object-fit:cover;">
+                </a>
+                <a href="doom.html" class="custom-button" style="left: 823px; top: -800px;">
+                    <img src="images/image 55.png" style="width:100%; height:100%; object-fit:cover;">
+                </a>
+                <a href="pathologic.html" class="custom-button" style="left: 1055px; top: -800px;">
+                    <img src="images/image 66.png" style="width:100%; height:100%; object-fit:cover;">
+                </a>
+            </div>
+
+            <div class="rounded-box"></div>
+            <div class="main-content-label">Основной контент</div>
+
+            <div class="gradient-rectangles">
+                <div class="gradient-rect" style="left: -140px;"></div>
+                <div class="gradient-rect" style="left: 390px;"></div>
+                <div class="gradient-rect" style="left: 919px;"></div>
+            </div>
+            <div class="inner-rectangles">
+                <div class="inner-rect" style="left: -110px; top: -1398px;"></div>
+                <div class="inner-rect" style="left: 420px; top: -1398px;"></div>
+                <div class="inner-rect" style="left: 949px; top: -1398px;"></div>
+            </div>
+            <div class="small-rectangles">
+                <div class="small-rect" style="left: 95px; top: 2015px;"></div>
+                <div class="small-rect" style="left: 625px; top: 2015px;"></div>
+                <div class="small-rect" style="left: 1155px; top: 2015px;"></div>
+            </div>
+            <div class="heading-overlay heading-1">Последние обзоры</div>
+            <div class="heading-overlay heading-2">Популярные темы</div>
+            <div class="heading-overlay heading-3">Топ игры</div>
+
+            <div class="photo-rectangles">
+                <div class="photo-rect" style="left: -87px; top: -1276px;">
+                    <img src="images/image 18.png" alt="review" style="cursor: pointer;">
+                </div>
+                <div class="photo-rect" style="left: 442px; top: -1280px;">
+                    <img src="images/image 20.png" alt="review">
+                </div>
+                <div class="photo-rect" style="left: 971px; top: -1276px;">
+                    <img src="images/image 21.png" alt="review" style="cursor: pointer;">
+                </div>
+            </div>
+
+            <div class="review-text-block">Обзор от Marmok...<br>Я ждал не это...<br>Самый провальный релиз?..</div>
+            <div class="topics-list">1. Cyberpunk<br>2. DLC GTA<br>3. VI утечки<br>4. Elden Ring 2<br>5. CS2 обновление</div>
+            <div class="top-games-list">1. Cyberpunk<br>2. Starfield<br>3. Baldur's<br>4. Gate 3<br>5. Split Fiction<br>6. Avowed<br>7. Hades 2<br>8. The Alters</div>
+
+            <div class="photo-rect" style="left: 60px; top: 2476px;">
+                <img src="images/image 17.png" alt="xcom" style="cursor: pointer;">
+            </div>
+            <div class="xcom-review">XCOM: обзор<br>Что же поменялось?<br>Новый босс, кто он?</div>
+
+            <div class="button-rect button-1" style="left: 120px; top: 2916px;">
+                <span class="button-text">Все обзоры</span>
+            </div>
+            <div class="button-rect button-2" style="left: 650px; top: 2916px;">
+                <span class="button-text">Все темы</span>
+            </div>
+            <div class="button-rect button-3" style="left: 1180px; top: 2916px;">
+                <span class="button-text">Все игры</span>
+            </div>
+        </div>
+    </main>
+
+    <div class="geeks-realm-layout">
+        <footer class="geeks-footer-container">
+            <div class="footer-header-row">
+                <div class="footer-brand">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <img src="images/logo.png" alt="" class="brand-logo">
+                        <span class="brand-name">Geek's Realm</span>
+                    </a>
+                </div>
+                <div class="footer-sub-form">
+                    <div class="input-group">
+                        <img src="images/Vector.png" alt="" class="icon-mail">
+                        <input type="text" placeholder="Введите свою почту, чтобы получать последние новости">
+                    </div>
+                    <button type="button">Отправить</button>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-main-content">
+                <div class="links-wrapper">
+                    <div class="links-block">
+                        <a href="news.html">Новости</a>
+                        <a href="news.html">Статьи</a>
+                        <a href="guides.html">Видео</a>
+                    </div>
+                    <div class="links-block">
+                        <a href="https://www.twitch.tv/directory" target="_blank" rel="noopener noreferrer">Стримы</a>
+                        <a href="#" id="contactsLink">Контакты</a>
+                        <a href="rules.html">Правила сооб-ва</a>
+                    </div>
+                    <div class="links-block">
+                        <a href="cheats.html">Читы</a>
+                        <a href="games.html">Игры</a>
+                        <a href="news.html">Блоги</a>
+                    </div>
+                </div>
+                <div class="footer-apps-section">
+                    <div class="store-links">
+                        <img src="images/Group.png" alt="App Store">
+                        <img src="images/Vector1.png" alt="Google Play">
+                    </div>
+                    <p class="join-label">Присоединяйтесь к нам</p>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-bottom-row">
+                <div class="copy-pill">CompanyName @ 202X. All rights reserved.</div>
+                <div class="social-group">
+                    <a href="#" id="telegramIcon"><img src="images/image 23.png" alt="TG"></a>
+                    <a href="#" id="instagramIcon"><img src="images/image 24.png" alt="INST"></a>
+                    <a href="#" id="youtubeIcon"><img src="images/image 25.png" alt="YT"></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Модальное окно для уведомлений -->
+<div id="notificationModal" class="notification-modal">
+    <div class="notification-modal-content">
+        <i class="fas fa-bell" style="font-size: 40px; margin-bottom: 15px; color: #AABDD7;"></i>
+        <p class="notification-modal-text">У вас пока нет новых сообщений.</p>
+        <button class="notification-modal-close">Закрыть</button>
+    </div>
+</div>
+
+<!-- Модальное окно для видео -->
+<div id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+        <span class="video-modal-close">&times;</span>
+        <iframe id="mainVideo" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+</div>
+
+<!-- Модальное окно для картинки (Telegram) -->
+<div id="imageModal" class="image-modal">
+    <div class="image-modal-content">
+        <span class="image-modal-close">&times;</span>
+        <img id="modalImage" src="" alt="Telegram">
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Переключение темы
+        const themeToggleBtn = document.querySelector('.theme-toggle');
+        if (themeToggleBtn) {
+            function setTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-theme');
+                    localStorage.setItem('geeks-theme', 'light');
+                } else {
+                    document.body.classList.remove('light-theme');
+                    localStorage.setItem('geeks-theme', 'dark');
+                }
+            }
+            const savedTheme = localStorage.getItem('geeks-theme');
+            if (savedTheme === 'light') setTheme('light');
+            else if (savedTheme === 'dark') setTheme('dark');
+            else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+            themeToggleBtn.addEventListener('click', () => {
+                const isLight = document.body.classList.contains('light-theme');
+                setTheme(isLight ? 'dark' : 'light');
+            });
+        }
+
+        // Уведомления
+        const bellBtn = document.querySelector('.icon-btn[aria-label="Уведомления"]');
+        const modal = document.getElementById('notificationModal');
+        const closeModal = document.querySelector('.notification-modal-close');
+        if (bellBtn && modal) {
+            bellBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
+        }
+        if (closeModal) {
+            closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+        }
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
+        // Видео-модалка (для картинок обзоров)
+        const videoModal = document.getElementById('videoModal');
+        const videoIframe = document.getElementById('mainVideo');
+        const closeVideoBtn = document.querySelector('.video-modal-close');
+
+        function openVideoModal(videoSrc) {
+            videoIframe.src = videoSrc + '?autoplay=1&rel=0';
+            videoModal.style.display = 'flex';
+        }
+
+        function closeVideoModal() {
+            videoModal.style.display = 'none';
+            videoIframe.src = '';
+        }
+
+        // Обработка картинок
+        const firstReviewImg = document.querySelector('.photo-rectangles .photo-rect:first-child');
+        if (firstReviewImg) {
+            firstReviewImg.addEventListener('click', () => {
+                openVideoModal('https://www.youtube.com/embed/5Puj_fY6ewk');
+            });
+        }
+
+        const thirdReviewImg = document.querySelector('.photo-rectangles .photo-rect:nth-child(3)');
+        if (thirdReviewImg) {
+            thirdReviewImg.addEventListener('click', () => {
+                window.location.href = 'games.html';
+            });
+        }
+
+        const xcomRect = document.querySelector('.photo-rect img[alt="xcom"]')?.closest('.photo-rect');
+        if (xcomRect) {
+            xcomRect.addEventListener('click', () => {
+                openVideoModal('https://www.youtube.com/embed/z_zwpb_aiLE');
+            });
+        }
+
+        if (closeVideoBtn) {
+            closeVideoBtn.addEventListener('click', closeVideoModal);
+        }
+        window.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeVideoModal();
+        });
+
+        // Кнопки "Все обзоры" и "Все игры"
+        const allReviewsBtn = document.querySelector('.button-rect.button-1');
+        const allGamesBtn = document.querySelector('.button-rect.button-3');
+        if (allReviewsBtn) {
+            allReviewsBtn.addEventListener('click', () => {
+                window.location.href = 'games.html';
+            });
+        }
+        if (allGamesBtn) {
+            allGamesBtn.addEventListener('click', () => {
+                window.location.href = 'games.html';
+            });
+        }
+
+        // Кнопка "Отправить" в футере
+        const submitBtn = document.querySelector('.footer-sub-form button');
+        if (submitBtn) {
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Спасибо, что поддерживаете нас! Теперь мы будем присылать вам самые свежие новости из мира игр!');
+            });
+        }
+
+        // --- Социальные иконки в подвале ---
+        // Telegram (image 23.png) – открыть модалку с картинкой
+        const tgIcon = document.getElementById('telegramIcon');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeImageBtn = document.querySelector('.image-modal-close');
+
+        if (tgIcon) {
+            tgIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                modalImage.src = 'images/image228.jpg';
+                imageModal.style.display = 'flex';
+            });
+        }
+        if (closeImageBtn) {
+            closeImageBtn.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+                modalImage.src = '';
+            });
+        }
+        window.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.style.display = 'none';
+                modalImage.src = '';
+            }
+        });
+
+        // Instagram (image 24.png) – переход по ссылке
+        const instIcon = document.getElementById('instagramIcon');
+        if (instIcon) {
+            instIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'https://www.instagram.com/go.lub97/';
+            });
+        }
+
+        // YouTube (image 25.png) – переход на youtube.com
+        const ytIcon = document.getElementById('youtubeIcon');
+        if (ytIcon) {
+            ytIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'https://youtube.com/';
+            });
+        }
+
+        // --- Кнопка "Контакты" в футере ---
+        const contactsLink = document.getElementById('contactsLink');
+        if (contactsLink) {
+            contactsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Наша почта- okva5@bk.ru');
+            });
+        }
+
+        // --- НОВЫЕ ОБРАБОТЧИКИ ДЛЯ НАВИГАЦИИ ---
+        // 1. Квадратные кнопки (image 5.png, image 2.png, image 3.png) → news.html
+        const squareButtons = document.querySelectorAll('.square-button');
+        if (squareButtons.length >= 3) {
+            // image 5.png (первая)
+            squareButtons[0].addEventListener('click', () => {
+                window.location.href = 'news.html';
+            });
+            // image 2.png (вторая)
+            squareButtons[1].addEventListener('click', () => {
+                window.location.href = 'news.html';
+            });
+            // image 3.png (третья)
+            squareButtons[2].addEventListener('click', () => {
+                window.location.href = 'news.html';
+            });
+        }
+
+        // 2. Второй прямоугольник в photo-rectangles (image 20.png) → forum.html
+        const photoRects = document.querySelectorAll('.photo-rectangles .photo-rect');
+        if (photoRects.length >= 2) {
+            const secondPhotoRect = photoRects[1];
+            secondPhotoRect.addEventListener('click', () => {
+                window.location.href = 'forum.html';
+            });
+        }
+    })();
+</script>
+</body>
+</html>

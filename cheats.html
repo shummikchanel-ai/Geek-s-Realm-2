@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek's Realm — Предупреждение о читах</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', 'Malgun Gothic', sans-serif;
+            line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .site-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background-color: #000000;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        .header {
+            background-color: #201E1E;
+            box-shadow: inset 11px 9px 33.3px -12px #DFC4C4;
+            padding: 56px 149px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .logo {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 26px;
+            font-weight: 500;
+            color: #A1A2BF;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .nav {
+            margin-left: 69px;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 42px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav a {
+            font-family: 'JejuGothic', 'Apple SD Gothic Neo', 'Nanum Gothic', sans-serif;
+            font-size: 18px;
+            color: #AABDD7;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: #d0e2ff;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #A1A2BF;
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.25s ease;
+            background-color: rgba(161, 162, 191, 0.05);
+            text-decoration: none;
+        }
+
+        .icon-btn i {
+            font-size: 22px;
+            pointer-events: none;
+        }
+
+        .icon-btn:hover {
+            color: #ffffff;
+            background-color: rgba(161, 162, 191, 0.2);
+        }
+
+        /* ---------- Хлебные крошки ---------- */
+        .breadcrumbs {
+            margin-bottom: 30px;
+            font-size: 16px;
+            color: #A6B0B4;
+        }
+        .breadcrumbs a {
+            color: #AABDD7;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .breadcrumbs a:hover {
+            color: #d0e2ff;
+            text-decoration: underline;
+        }
+        body.light-theme .breadcrumbs {
+            color: #5a5a6e;
+        }
+        body.light-theme .breadcrumbs a {
+            color: #2c3e66;
+        }
+
+        /* ---------- ОСНОВНОЕ СОДЕРЖАНИЕ (предупреждение) ---------- */
+        .main-content {
+            padding: 80px 149px 120px;
+            color: #e0e0e0;
+            min-height: 60vh;
+        }
+
+        .warning-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            padding: 50px 60px;
+            border-left: 6px solid #ff4444;
+        }
+
+        .warning-container h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #ff8888;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .warning-container h2 {
+            font-size: 26px;
+            margin: 30px 0 15px 0;
+            color: #AABDD7;
+        }
+
+        .warning-container p {
+            font-size: 18px;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .warning-container ul {
+            margin: 15px 0 20px 40px;
+        }
+
+        .warning-container li {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .legal-note {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 16px;
+            color: #aaa;
+        }
+
+        /* ---------- ФУТЕР ---------- */
+        .geeks-realm-layout {
+            width: 1440px;
+            height: 718px;
+            margin: 0 auto;
+            margin-top: 150px;
+            background-color: #1a1a1a;
+            font-family: 'JejuGothic', sans-serif;
+            color: #ffffff;
+            box-sizing: border-box;
+            display: block;
+            position: relative;
+            left: 0px;
+            top: -200px;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .geeks-footer-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 80px;
+            box-sizing: border-box;
+        }
+
+        .footer-line {
+            width: 100%;
+            height: 2px;
+            background-color: #3d3d3d;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-name {
+            font-size: 32px;
+            color: #a4a4b2;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .brand-logo { height: 50px; vertical-align: middle; }
+
+        .footer-sub-form {
+            display: flex;
+            background-color: #212635;
+            border-radius: 4px;
+            width: 650px;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            flex-grow: 1;
+        }
+
+        .icon-mail { height: 20px; }
+
+        .input-group input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 18px;
+            width: 100%;
+            outline: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-sub-form button {
+            background-color: #5578ab;
+            color: white;
+            border: none;
+            padding: 0 40px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .links-wrapper { display: flex; gap: 80px; }
+
+        .links-block {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 25px 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .links-block a {
+            display: flex;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-apps-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 30px;
+        }
+
+        .store-links img { height: 55px; margin-left: 15px; }
+
+        .join-label {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 35px;
+            border-radius: 40px;
+            letter-spacing: 2px;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-pill {
+            background-color: #2a2a2a;
+            padding: 10px 35px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #888;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+
+        .social-group a { margin-left: 25px; }
+        .social-group img { height: 50px; }
+
+        /* ---------- Модальное окно уведомлений ---------- */
+        .notification-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        .notification-modal-content {
+            background-color: #1a1a1a;
+            padding: 30px 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .notification-modal-text {
+            font-size: 20px;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+        .notification-modal-close {
+            background-color: #5578ab;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .notification-modal-close:hover {
+            background-color: #3a5a8a;
+        }
+
+        /* Модальное окно для картинки (Telegram) */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        .image-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+        }
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.5);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .image-modal-close:hover {
+            background: rgba(0,0,0,0.9);
+            color: #AABDD7;
+        }
+
+        /* ---------- СВЕТЛАЯ ТЕМА ---------- */
+        body.light-theme {
+            background-color: #f5f5f7;
+        }
+        body.light-theme .site-container {
+            background-color: #ffffff;
+        }
+        body.light-theme .header {
+            background-color: #e9e9ef;
+            box-shadow: inset 11px 9px 33.3px -12px rgba(0,0,0,0.15);
+        }
+        body.light-theme .logo,
+        body.light-theme .nav a {
+            color: #1e1e2a;
+        }
+        body.light-theme .icon-btn {
+            color: #2c2c38;
+            background-color: rgba(0,0,0,0.05);
+        }
+        body.light-theme .icon-btn:hover {
+            color: #000;
+            background-color: rgba(0,0,0,0.15);
+        }
+        body.light-theme .main-content {
+            color: #1a1a1a;
+        }
+        body.light-theme .warning-container {
+            background: rgba(0,0,0,0.03);
+            border-left-color: #cc0000;
+        }
+        body.light-theme .warning-container h1 {
+            color: #cc0000;
+        }
+        body.light-theme .warning-container h2 {
+            color: #2c3e66;
+        }
+        body.light-theme .legal-note {
+            border-top-color: rgba(0,0,0,0.15);
+            color: #555;
+        }
+        body.light-theme .geeks-realm-layout {
+            background-color: #eaeef5;
+            color: #111;
+        }
+        body.light-theme .footer-line {
+            background-color: #b0b0b8;
+        }
+        body.light-theme .brand-name {
+            color: #2c2c3a;
+        }
+        body.light-theme .footer-sub-form {
+            background-color: #d0d4e0;
+        }
+        body.light-theme .input-group input {
+            color: #111;
+        }
+        body.light-theme .footer-sub-form button {
+            background-color: #3a6a9a;
+        }
+        body.light-theme .links-block {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        body.light-theme .links-block a {
+            color: #1a1a2a;
+        }
+        body.light-theme .join-label {
+            background: rgba(0, 0, 0, 0.05);
+            color: #222;
+        }
+        body.light-theme .copy-pill {
+            background-color: #d0d0d8;
+            color: #333;
+        }
+        body.light-theme .notification-modal-content {
+            background-color: #f0f0f5;
+            border-color: rgba(0,0,0,0.1);
+        }
+        body.light-theme .notification-modal-text {
+            color: #1a1a2a;
+        }
+        body.light-theme .image-modal-content {
+            background: #f0f0f5;
+        }
+        body.light-theme .image-modal-close {
+            color: #1a1a2a;
+            background: rgba(255,255,255,0.5);
+        }
+        body.light-theme .image-modal-close:hover {
+            background: rgba(255,255,255,0.9);
+        }
+    </style>
+</head>
+<body>
+<div class="site-container">
+    <header class="header">
+        <a href="index.html" class="logo-link">
+            <img src="images/logo.png" alt="logo" style="height:50px;">
+            <div class="logo">Geek's Realm</div>
+        </a>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="games.html">Обзоры</a></li>
+                <li><a href="guides.html">Гайды</a></li>
+                <li><a href="forum.html">Форум</a></li>
+            </ul>
+        </nav>
+        <div class="buttons">
+            <a href="profile.html" class="icon-btn" aria-label="Профиль"><i class="fas fa-user"></i></a>
+            <button class="icon-btn" aria-label="Уведомления"><i class="fas fa-bell"></i></button>
+            <button class="icon-btn theme-toggle" aria-label="Настройки"><i class="fas fa-cog"></i></button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> → Читы
+        </div>
+        <div class="warning-container">
+            <h1><i class="fas fa-gavel"></i> Предупреждение о читах</h1>
+            <p>Использование читов в России может привести как к игровой блокировке, так и к уголовной ответственности, в зависимости от того, как и где вы их используете.</p>
+            <h2>Юридические последствия в РФ</h2>
+            <p>Законодательство России разделяет использование читов на бытовом уровне и их создание/распространение:</p>
+            <ul>
+                <li><strong>Уголовная ответственность:</strong> Статья 273 УК РФ (создание и использование вредоносных программ). В России уже есть судебные прецеденты: в 2022 году создатель читов для World of Tanks получил 2,5 года ограничения свободы.</li>
+                <li><strong>Новые штрафы в киберспорте:</strong> С конца 2025 года в России обсуждается введение административных штрафов (до 30 000 рублей) за читерство в профессиональном компьютерном спорте, приравнивая это к использованию допинга.</li>
+                <li><strong>Гражданские иски:</strong> Разработчики игр могут подавать в суд на создателей читов за нарушение авторских прав и обход систем защиты.</li>
+            </ul>
+            <h2>Игровые ограничения</h2>
+            <p>Помимо закона, действуют правила самих игровых платформ:</p>
+            <ul>
+                <li><strong>Одиночные игры:</strong> Использование чит-кодов (например, в GTA) обычно разрешено и не наказывается, так как это не вредит другим игрокам.</li>
+                <li><strong>Онлайн-игры:</strong> Использование стороннего ПО в мультиплеере строго запрещено пользовательским соглашением. Это неизбежно ведет к бану аккаунта (временному или постоянному) через системы защиты вроде VAC.</li>
+            </ul>
+            <div class="legal-note"><i class="fas fa-info-circle"></i> Данная информация носит ознакомительный характер и не является юридической консультацией.</div>
+        </div>
+    </main>
+
+    <div class="geeks-realm-layout">
+        <footer class="geeks-footer-container">
+            <div class="footer-header-row">
+                <div class="footer-brand">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <img src="images/logo.png" alt="" class="brand-logo">
+                        <span class="brand-name">Geek's Realm</span>
+                    </a>
+                </div>
+                <div class="footer-sub-form">
+                    <div class="input-group">
+                        <img src="images/Vector.png" alt="" class="icon-mail">
+                        <input type="text" placeholder="Введите свою почту, чтобы получать последние новости">
+                    </div>
+                    <button type="button">Отправить</button>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-main-content">
+                <div class="links-wrapper">
+                    <div class="links-block">
+                        <a href="news.html">Новости</a>
+                        <a href="news.html">Статьи</a>
+                        <a href="guides.html">Видео</a>
+                    </div>
+                    <div class="links-block">
+                        <a href="https://www.twitch.tv/directory" target="_blank" rel="noopener noreferrer">Стримы</a>
+                        <a href="#" id="contactsLink">Контакты</a>
+                        <a href="rules.html">Правила сооб-ва</a>
+                    </div>
+                    <div class="links-block">
+                        <a href="cheats.html">Читы</a>
+                        <a href="games.html">Игры</a>
+                        <a href="news.html">Блоги</a>
+                    </div>
+                </div>
+                <div class="footer-apps-section">
+                    <div class="store-links">
+                        <img src="images/Group.png" alt="App Store">
+                        <img src="images/Vector1.png" alt="Google Play">
+                    </div>
+                    <p class="join-label">Присоединяйтесь к нам</p>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-bottom-row">
+                <div class="copy-pill">CompanyName @ 202X. All rights reserved.</div>
+                <div class="social-group">
+                    <a href="#" id="telegramIcon"><img src="images/image 23.png" alt="TG"></a>
+                    <a href="#" id="instagramIcon"><img src="images/image 24.png" alt="INST"></a>
+                    <a href="#" id="youtubeIcon"><img src="images/image 25.png" alt="YT"></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Модальное окно уведомлений -->
+<div id="notificationModal" class="notification-modal">
+    <div class="notification-modal-content">
+        <i class="fas fa-bell" style="font-size: 40px; margin-bottom: 15px; color: #AABDD7;"></i>
+        <p class="notification-modal-text">У вас пока нет новых сообщений.</p>
+        <button class="notification-modal-close">Закрыть</button>
+    </div>
+</div>
+
+<!-- Модальное окно для картинки (Telegram) -->
+<div id="imageModal" class="image-modal">
+    <div class="image-modal-content">
+        <span class="image-modal-close">&times;</span>
+        <img id="modalImage" src="" alt="Telegram">
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Переключение темы
+        const themeToggleBtn = document.querySelector('.theme-toggle');
+        if (themeToggleBtn) {
+            function setTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-theme');
+                    localStorage.setItem('geeks-theme', 'light');
+                } else {
+                    document.body.classList.remove('light-theme');
+                    localStorage.setItem('geeks-theme', 'dark');
+                }
+            }
+            const savedTheme = localStorage.getItem('geeks-theme');
+            if (savedTheme === 'light') setTheme('light');
+            else if (savedTheme === 'dark') setTheme('dark');
+            else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+            themeToggleBtn.addEventListener('click', () => {
+                const isLight = document.body.classList.contains('light-theme');
+                setTheme(isLight ? 'dark' : 'light');
+            });
+        }
+
+        // Уведомления
+        const bellBtn = document.querySelector('.icon-btn[aria-label="Уведомления"]');
+        const modal = document.getElementById('notificationModal');
+        const closeModal = document.querySelector('.notification-modal-close');
+        if (bellBtn && modal) {
+            bellBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
+        }
+        if (closeModal) {
+            closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+        }
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+
+        // --- Социальные иконки в подвале ---
+        // Telegram (image 23.png) – открыть модалку с картинкой
+        const tgIcon = document.getElementById('telegramIcon');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeImageBtn = document.querySelector('.image-modal-close');
+
+        if (tgIcon) {
+            tgIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                modalImage.src = 'images/image228.jpg';
+                imageModal.style.display = 'flex';
+            });
+        }
+        if (closeImageBtn) {
+            closeImageBtn.addEventListener('click', () => {
+                imageModal.style.display = 'none';
+                modalImage.src = '';
+            });
+        }
+        window.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.style.display = 'none';
+                modalImage.src = '';
+            }
+        });
+
+        // Instagram (image 24.png) – переход по ссылке
+        const instIcon = document.getElementById('instagramIcon');
+        if (instIcon) {
+            instIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'https://www.instagram.com/go.lub97/';
+            });
+        }
+
+        // YouTube (image 25.png) – переход на youtube.com
+        const ytIcon = document.getElementById('youtubeIcon');
+        if (ytIcon) {
+            ytIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'https://youtube.com/';
+            });
+        }
+
+        // Кнопка "Отправить" в подвале
+        const submitBtn = document.querySelector('.footer-sub-form button');
+        if (submitBtn) {
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Спасибо, что поддерживаете нас! Теперь мы будем присылать вам самые свежие новости из мира игр!');
+            });
+        }
+        // Кнопка "Контакты" в футере
+        const contactsLink = document.getElementById('contactsLink');
+        if (contactsLink) {
+            contactsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Наша почта- okva5@bk.ru');
+            });
+        }
+    })();
+</script>
+</body>
+</html>
